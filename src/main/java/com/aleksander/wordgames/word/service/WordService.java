@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.aleksander.wordgames.model.entity.Word;
 import com.aleksander.wordgames.model.entity.WordDefinition;
+import com.aleksander.wordgames.word.dto.WordDefinitionsResponse;
 import com.aleksander.wordgames.word.dto.WordDto;
 import com.aleksander.wordgames.word.dto.WordExistsResponse;
 import com.aleksander.wordgames.word.dto.WordFilterRequest;
@@ -85,30 +86,31 @@ public class WordService {
         return new WordExistsResponse(normalized, exists, now);
     }
 
-    public List<String> getDefinitions(String word, Integer limit, boolean random) {
+    public WordDefinitionsResponse getDefinitionsResponse(
+            String word,
+            Integer limit,
+            boolean random) {
 
-        Word entity = wordRepository.findByLemma(word.toLowerCase())
-                .orElseThrow(() -> new WordNotFoundException(word));
+        Instant now = Instant.now();
 
-        List<String> definitions = definitionRepository
-                .findByWordId(entity.getId())
-                .stream()
-                .map(WordDefinition::getDefinition)
-                .collect(Collectors.toList());
-
-        if (definitions.isEmpty()) {
-            return List.of();
+        if (word == null || word.isBlank()) {
+            throw new WordNotFoundException(word);
         }
 
-        if (random) {
-            Collections.shuffle(definitions);
+        String normalized = normalize(word);
+
+        if (!exists(normalized)) {
+            throw new WordNotFoundException(word);
         }
 
-        if (limit != null && limit > 0 && limit < definitions.size()) {
-            return definitions.subList(0, limit);
-        }
+        List<String> definitions = getDefinitions(normalized, limit, random);
 
-        return definitions;
+        return new WordDefinitionsResponse(
+                normalized,
+                definitions.size(),
+                random,
+                definitions,
+                now);
     }
 
     // ---------------- helpers ----------------
@@ -220,5 +222,35 @@ public class WordService {
 
     public boolean exists(String lemma) {
         return wordRepository.existsByLemma(lemma);
+    }
+
+    public List<String> getDefinitions(String lemma, Integer limit, boolean random) {
+
+        Word entity = getWordOrThrow(lemma);
+
+        List<String> definitions = definitionRepository
+                .findByWordId(entity.getId())
+                .stream()
+                .map(WordDefinition::getDefinition)
+                .collect(Collectors.toList());
+
+        if (definitions.isEmpty()) {
+            return List.of();
+        }
+
+        if (random) {
+            Collections.shuffle(definitions);
+        }
+
+        if (limit != null && limit > 0 && limit < definitions.size()) {
+            return definitions.subList(0, limit);
+        }
+
+        return definitions;
+    }
+
+    private Word getWordOrThrow(String lemma) {
+        return wordRepository.findByLemma(lemma)
+                .orElseThrow(() -> new WordNotFoundException(lemma));
     }
 }

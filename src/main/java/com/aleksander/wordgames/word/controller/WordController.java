@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.web.bind.annotation.*;
 
+import com.aleksander.wordgames.word.dto.WordDefinitionsResponse;
 import com.aleksander.wordgames.word.dto.WordExistsResponse;
 import com.aleksander.wordgames.word.dto.WordFilterRequest;
 import com.aleksander.wordgames.word.dto.WordResponse;
@@ -58,11 +59,11 @@ public class WordController {
     }
 
     @GetMapping("/definitions")
-    public List<String> getDefinitions(
+    public WordDefinitionsResponse getDefinitions(
             @RequestParam String word,
             @RequestParam(required = false) Integer limit,
             @RequestParam(defaultValue = "false") boolean random) {
 
-        return wordService.getDefinitions(word, limit, random);
+        return wordService.getDefinitionsResponse(word, limit, random);
     }
 }
