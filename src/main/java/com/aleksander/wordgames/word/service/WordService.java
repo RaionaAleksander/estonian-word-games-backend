@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import com.aleksander.wordgames.model.entity.Word;
 import com.aleksander.wordgames.model.entity.WordDefinition;
 import com.aleksander.wordgames.word.dto.WordDto;
+import com.aleksander.wordgames.word.dto.WordExistsResponse;
 import com.aleksander.wordgames.word.dto.WordFilterRequest;
 import com.aleksander.wordgames.word.dto.WordResponse;
 import com.aleksander.wordgames.word.enums.SortOrder;
@@ -67,6 +68,21 @@ public class WordService {
                 result.size(),
                 result,
                 Instant.now());
+    }
+
+    public WordExistsResponse checkExists(String word) {
+
+        Instant now = Instant.now();
+
+        if (word == null || word.isBlank()) {
+            return new WordExistsResponse(null, false, now);
+        }
+
+        String normalized = normalize(word);
+
+        boolean exists = exists(normalized);
+
+        return new WordExistsResponse(normalized, exists, now);
     }
 
     public List<String> getDefinitions(String word, Integer limit, boolean random) {
@@ -196,6 +212,10 @@ public class WordService {
         return list.stream()
                 .sorted(comparator)
                 .toList();
+    }
+
+    public String normalize(String word) {
+        return word.trim().toLowerCase();
     }
 
     public boolean exists(String lemma) {

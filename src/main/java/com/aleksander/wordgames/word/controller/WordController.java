@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.web.bind.annotation.*;
 
+import com.aleksander.wordgames.word.dto.WordExistsResponse;
 import com.aleksander.wordgames.word.dto.WordFilterRequest;
 import com.aleksander.wordgames.word.dto.WordResponse;
 import com.aleksander.wordgames.word.enums.SortOrder;
@@ -49,6 +50,11 @@ public class WordController {
                 order);
 
         return wordService.getWords(request);
+    }
+
+    @GetMapping("/exists")
+    public WordExistsResponse exists(@RequestParam String word) {
+        return wordService.checkExists(word);
     }
 
     @GetMapping("/definitions")
