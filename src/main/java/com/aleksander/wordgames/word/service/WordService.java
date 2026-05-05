@@ -9,6 +9,7 @@ import com.aleksander.wordgames.word.dto.WordDefinitionsResponse;
 import com.aleksander.wordgames.word.dto.WordDto;
 import com.aleksander.wordgames.word.dto.WordExistsResponse;
 import com.aleksander.wordgames.word.dto.WordFilterRequest;
+import com.aleksander.wordgames.word.dto.WordPatternResponse;
 import com.aleksander.wordgames.word.dto.WordResponse;
 import com.aleksander.wordgames.word.enums.SortOrder;
 import com.aleksander.wordgames.word.exception.InvalidSortException;
@@ -18,6 +19,7 @@ import com.aleksander.wordgames.word.repository.WordRepository;
 
 import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -79,6 +81,29 @@ public class WordService {
                 definitions.size(),
                 random,
                 definitions,
+                now);
+    }
+
+    public WordPatternResponse getPatternResponse(String word, int visibleLetters) {
+
+        Instant now = Instant.now();
+
+        if (word == null || word.isBlank()) {
+            throw new WordNotFoundException(word);
+        }
+
+        String normalized = normalize(word);
+
+        if (!exists(normalized)) {
+            throw new WordNotFoundException(word);
+        }
+
+        String pattern = generatePattern(normalized, visibleLetters);
+
+        return new WordPatternResponse(
+                normalized,
+                pattern,
+                visibleLetters,
                 now);
     }
 
@@ -261,5 +286,36 @@ public class WordService {
         }
 
         return result;
+    }
+
+    private String generatePattern(String word, int visibleLetters) {
+
+        int length = word.length();
+
+        if (visibleLetters <= 0) {
+            visibleLetters = 1;
+        }
+
+        if (visibleLetters >= length) {
+            return word;
+        }
+
+        char[] result = new char[length];
+        Arrays.fill(result, '_');
+
+        List<Integer> indexes = new ArrayList<>();
+
+        for (int i = 0; i < length; i++) {
+            indexes.add(i);
+        }
+
+        Collections.shuffle(indexes);
+
+        for (int i = 0; i < visibleLetters; i++) {
+            int index = indexes.get(i);
+            result[index] = word.charAt(index);
+        }
+
+        return new String(result);
     }
 }

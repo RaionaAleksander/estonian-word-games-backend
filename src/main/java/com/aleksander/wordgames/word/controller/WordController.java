@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import com.aleksander.wordgames.word.dto.WordDefinitionsResponse;
 import com.aleksander.wordgames.word.dto.WordExistsResponse;
 import com.aleksander.wordgames.word.dto.WordFilterRequest;
+import com.aleksander.wordgames.word.dto.WordPatternResponse;
 import com.aleksander.wordgames.word.dto.WordResponse;
 import com.aleksander.wordgames.word.enums.SortOrder;
 import com.aleksander.wordgames.word.enums.SortType;
@@ -65,5 +66,13 @@ public class WordController {
             @RequestParam(defaultValue = "false") boolean random) {
 
         return wordService.getDefinitionsResponse(word, limit, random);
+    }
+
+    @GetMapping("/pattern")
+    public WordPatternResponse getPattern(
+            @RequestParam String word,
+            @RequestParam(defaultValue = "2") int visibleLetters) {
+
+        return wordService.getPatternResponse(word, visibleLetters);
     }
 }
