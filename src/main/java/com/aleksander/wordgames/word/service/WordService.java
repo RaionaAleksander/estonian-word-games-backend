@@ -32,7 +32,7 @@ public class WordService {
     private final WordRepository wordRepository;
     private final WordDefinitionRepository definitionRepository;
 
-    public WordResponse getWords(WordFilterRequest request) {
+    public WordResponse getWordsResponse(WordFilterRequest request) {
 
         List<WordDto> result = findWords(request);
 
@@ -254,11 +254,10 @@ public class WordService {
                 .orElseThrow(() -> new WordNotFoundException(lemma));
     }
 
-    public List<WordDto> findWords(WordFilterRequest request) {
-
+    public List<Word> filterWords(WordFilterRequest request) {
         List<Word> words = wordRepository.findAll();
 
-        List<WordDto> filtered = words.stream()
+        return words.stream()
                 .filter(w -> filterByLength(w, request))
                 .filter(w -> filterByStartsWith(w, request))
                 .filter(w -> filterByEndsWith(w, request))
@@ -266,10 +265,13 @@ public class WordService {
                 .filter(w -> filterByNotContains(w, request))
                 .filter(w -> filterByPattern(w, request))
                 .filter(w -> filterByExcludedWords(w, request))
+                .collect(Collectors.toList());
+    }
+
+    public List<WordDto> processWords(List<Word> words, WordFilterRequest request) {
+        List<WordDto> result = words.stream()
                 .map(this::toDto)
                 .collect(Collectors.toList());
-
-        List<WordDto> result = new ArrayList<>(filtered);
 
         // random + limit + sort logic
         if (Boolean.TRUE.equals(request.getRandom())) {
@@ -292,6 +294,11 @@ public class WordService {
         }
 
         return result;
+    }
+
+    public List<WordDto> findWords(WordFilterRequest request) {
+        List<Word> filtered = filterWords(request);
+        return processWords(filtered, request);
     }
 
     public String generatePattern(String word, int visibleLetters) {

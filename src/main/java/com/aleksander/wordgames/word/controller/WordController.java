@@ -51,7 +51,7 @@ public class WordController {
                 sort,
                 order);
 
-        return wordService.getWords(request);
+        return wordService.getWordsResponse(request);
     }
 
     @GetMapping("/exists")
