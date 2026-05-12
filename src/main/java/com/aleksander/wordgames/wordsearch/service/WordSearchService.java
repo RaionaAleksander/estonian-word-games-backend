@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import com.aleksander.wordgames.common.enums.Direction;
+import com.aleksander.wordgames.exception.InvalidDirectionException;
 import com.aleksander.wordgames.generator.GameGenerator;
 import com.aleksander.wordgames.word.dto.WordDto;
 import com.aleksander.wordgames.word.dto.filter.WordFilterRequest;
@@ -15,7 +16,6 @@ import com.aleksander.wordgames.word.service.WordService;
 import com.aleksander.wordgames.wordsearch.dto.PlacementDto;
 import com.aleksander.wordgames.wordsearch.dto.WordSearchRequest;
 import com.aleksander.wordgames.wordsearch.dto.WordSearchResponse;
-import com.aleksander.wordgames.wordsearch.exception.InvalidDirectionException;
 import com.aleksander.wordgames.wordsearch.exception.NoWordsFoundException;
 import com.aleksander.wordgames.wordsearch.exception.WordSearchGenerationException;
 import com.aleksander.wordgames.wordsearch.validation.WordSearchValidator;
