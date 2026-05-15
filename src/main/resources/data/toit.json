@@ -428,7 +428,7 @@
     "definitions": ["Paksukooreline vili, mille sees on palju punaseid ja mahlaseid seemneid"]
   },
   {
-    "word": "tähtvili",
+    "word": "karamboola",
     "definitions": ["Kollane puuvili, mis lahti lõigates meenutab tähte"]
   },
   {
@@ -444,7 +444,7 @@
     "definitions": ["Väike oranž ja pehme vili, mis sarnaneb virsikule"]
   },
   {
-    "word": "draakonivili",
+    "word": "pitahaya",
     "definitions": ["Eksootiline vili, millel on roosakas koor ja seest täpiline sisu"]
   },
   {
@@ -498,5 +498,165 @@
   {
     "word": "seemned",
     "definitions": ["Väikesed kõva koorega viljad, mida saab süüa või istutada"]
+  },
+  {
+    "word": "puljong",
+    "definitions": ["Liha või köögiviljade keetmisel saadav maitsekas vedelik", "Supi põhi"]
+  },
+  {
+    "word": "filee",
+    "definitions": ["Kondita ja puhas lihatükk või kalatükk"]
+  },
+  {
+    "word": "rassolnik",
+    "definitions": ["Traditsiooniline supp, mille kohustuslik komponent on hapukurk"]
+  },
+  {
+    "word": "vahvel",
+    "definitions": ["Ruudulise mustriga krõbe küpsetis, mida süüakse sageli jäätisega"]
+  },
+  {
+    "word": "šampinjoon",
+    "definitions": ["Valge kasvatatud söögiseen, mida müüakse poes aastaringselt"]
+  },
+  {
+    "word": "mahlajook",
+    "definitions": ["Jook, mis sisaldab mahla, vett ja sageli ka lisatud suhkrut"]
+  },
+  {
+    "word": "lasteviiner",
+    "definitions": ["Maheda maitsega viiner, mis on laste suur lemmik"]
+  },
+  {
+    "word": "vesi",
+    "definitions": ["Maailma kõige tähtsam ja puhtam jook, eluks vajalik vedelik"]
+  },
+  {
+    "word": "toorpiim",
+    "definitions": ["Töötlemata ja pastöriseerimata piim otse lehmalt"]
+  },
+  {
+    "word": "smuuti",
+    "definitions": ["Paks jook, mis on tehtud purustatud puuviljadest või marjadest"]
+  },
+  {
+    "word": "röstsai",
+    "definitions": ["Sai, mis on mõeldud rösteris krõbedaks laskmiseks"]
+  },
+  {
+    "word": "hapupiim",
+    "definitions": ["Hapendatud piimatoode, sarnane keefirile"]
+  },
+  {
+    "word": "siirup",
+    "definitions": ["Väga magus ja paks vedelik, mida lahjendatakse veega joogiks"]
+  },
+  {
+    "word": "ekleer",
+    "definitions": ["Piklik kreemitäidisega magus küpsetis, millel on peal šokolaadiglasuur"]
+  },
+  {
+    "word": "stritsel",
+    "definitions": ["Pikk põimitud magus pärmitaignast küpsetis, tihti rosinatega"]
+  },
+  {
+    "word": "sink",
+    "definitions": ["Soolatud ja sageli suitsutatud lihatoode, mida pannakse leiva peale"]
+  },
+  {
+    "word": "kohvikoor",
+    "definitions": ["Vedel lahjem koor, mida valatakse kohvi sisse"]
+  },
+  {
+    "word": "kodujuust",
+    "definitions": ["Teralise tekstuuriga lahja ja tervislik kohupiimasarnane juust"]
+  },
+  {
+    "word": "kohuke",
+    "definitions": ["Eestlaste lemmik kohupiimamaiustus, mis on kaetud šokolaadiga"]
+  },
+  {
+    "word": "närimiskumm",
+    "definitions": ["Närimiseks mõeldud maiustus, mis teeb hingeõhu värskeks"]
+  },
+  {
+    "word": "tomatipasta",
+    "definitions": ["Paks ja kange tomatist tehtud kontsentraat kasmeste jaoks"]
+  },
+  {
+    "word": "nuudlid",
+    "definitions": ["Pikad ja peenikesed tainaribad, sarnased spagettidele"]
+  },
+  {
+    "word": "hapukapsas",
+    "definitions": ["Eestlaste traditsiooniline talve- ja jõulutoit, hapendatud köögivili"]
+  },
+  {
+    "word": "frikadeel",
+    "definitions": ["Väike lihapall, mida pannakse tavaliselt selge supi sisse"]
+  },
+  {
+    "word": "jogurt",
+    "definitions": ["Hapendatud piimatoode, mis on sageli puuviljamaitseline"]
+  },
+  {
+    "word": "snäkk",
+    "definitions": ["Väike vahepala või suupiste põhitoidukordade vahel"]
+  },
+  {
+    "word": "batoon",
+    "definitions": ["Piklik maiustus, näiteks šokolaadi- või teraviljabatoon"]
+  },
+  {
+    "word": "bataat",
+    "definitions": ["Maguskartul, mis on seest oranžikas"]
+  },
+  {
+    "word": "brokoli",
+    "definitions": ["Roheline kapsaseline, mida kutsutakse ka koševkapsaks"]
+  },
+  {
+    "word": "varsseller",
+    "definitions": ["Pikkade krõmpsuvate roheliste vartega köögivili"]
+  },
+  {
+    "word": "porrulauk",
+    "definitions": ["Sibula sugulane, pika rohelise ja valge varrega köögivili"]
+  },
+  {
+    "word": "naeris",
+    "definitions": ["Traditsiooniline kollane või valge ümar juurvili, mida söödi enne kartulit"]
+  },
+  {
+    "word": "juurseller",
+    "definitions": ["Suure tugeva juurikaga köögivili, mis annab supile hea maitse"]
+  },
+  {
+    "word": "fenkol",
+    "definitions": ["Aniisilõhnaline ja -maitseline mugulköögivili, apteegitill"]
+  },
+  {
+    "word": "pomel",
+    "definitions": ["Kõige suurem tsitrusvili, millel on paks koor ja kuivem sisu"]
+  },
+  {
+    "word": "greip",
+    "definitions": ["Mõrkja maitsega suur oranž või punane tsitrusvili"]
+  },
+  {
+    "word": "hurmaa",
+    "definitions": ["Oranž läikiv ja magus sügis-talvine vili, mis on pärit Aasiast"]
+  },
+  {
+    "word": "murel",
+    "definitions": ["Magus ja mahlane kirsi sugulane, suvine puuvili"]
+  },
+  {
+    "word": "ananass",
+    "definitions": ["Suur torkiva koore ja kollase sisuga troopiline puuvili"]
+  },
+  {
+    "word": "martsipan",
+    "definitions": ["Magus mass, mida tehakse mandlitest ja tuhksuhkrust", "Maiustus, millest voolitakse sageli ilusaid kujukesi"]
   }
 ]
