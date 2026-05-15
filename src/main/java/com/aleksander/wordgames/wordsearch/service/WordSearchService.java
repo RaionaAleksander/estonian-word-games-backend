@@ -111,6 +111,8 @@ public class WordSearchService implements GameGenerator<WordSearchRequest, WordS
                 fillRandom(grid);
 
                 return new WordSearchResponse(
+                        rows,
+                        cols,
                         grid,
                         words,
                         placements,

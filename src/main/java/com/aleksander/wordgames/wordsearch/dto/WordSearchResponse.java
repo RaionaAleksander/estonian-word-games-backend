@@ -10,6 +10,10 @@ import java.util.List;
 @AllArgsConstructor
 public class WordSearchResponse {
 
+    private int rows;
+
+    private int cols;
+
     private char[][] grid;
 
     private List<String> words;
