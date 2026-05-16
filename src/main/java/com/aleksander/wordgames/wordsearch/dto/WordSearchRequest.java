@@ -1,6 +1,6 @@
 package com.aleksander.wordgames.wordsearch.dto;
 
-import com.aleksander.wordgames.word.dto.filter.WordFilterRequest;
+import com.aleksander.wordgames.word.dto.request.WordFilterRequest;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

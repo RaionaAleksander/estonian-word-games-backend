@@ -6,15 +6,15 @@ import java.util.List;
 
 import org.springframework.web.bind.annotation.*;
 
-import com.aleksander.wordgames.word.dto.WordDefinitionsResponse;
-import com.aleksander.wordgames.word.dto.WordExistsResponse;
-import com.aleksander.wordgames.word.dto.WordPageResponse;
-import com.aleksander.wordgames.word.dto.WordPatternResponse;
-import com.aleksander.wordgames.word.dto.WordResponse;
-import com.aleksander.wordgames.word.dto.filter.WordFilterRequest;
-import com.aleksander.wordgames.word.dto.filter.WordSortRequest;
+import com.aleksander.wordgames.word.dto.request.WordFilterRequest;
 import com.aleksander.wordgames.word.dto.request.WordListRequest;
 import com.aleksander.wordgames.word.dto.request.WordPageRequest;
+import com.aleksander.wordgames.word.dto.request.WordSortRequest;
+import com.aleksander.wordgames.word.dto.response.WordDefinitionsResponse;
+import com.aleksander.wordgames.word.dto.response.WordExistsResponse;
+import com.aleksander.wordgames.word.dto.response.WordPageResponse;
+import com.aleksander.wordgames.word.dto.response.WordPatternResponse;
+import com.aleksander.wordgames.word.dto.response.WordResponse;
 import com.aleksander.wordgames.word.enums.SortOrder;
 import com.aleksander.wordgames.word.enums.SortType;
 import com.aleksander.wordgames.word.service.WordService;

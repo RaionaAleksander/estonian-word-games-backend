@@ -1,4 +1,4 @@
-package com.aleksander.wordgames.word.dto;
+package com.aleksander.wordgames.word.dto.response;
 
 import java.time.Instant;
 

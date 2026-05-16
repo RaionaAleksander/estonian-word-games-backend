@@ -11,7 +11,7 @@ import com.aleksander.wordgames.common.enums.Direction;
 import com.aleksander.wordgames.findword.dto.FindWordRequest;
 import com.aleksander.wordgames.findword.dto.FindWordResponse;
 import com.aleksander.wordgames.findword.service.FindWordService;
-import com.aleksander.wordgames.word.dto.filter.WordFilterRequest;
+import com.aleksander.wordgames.word.dto.request.WordFilterRequest;
 
 import lombok.RequiredArgsConstructor;
 

@@ -6,7 +6,7 @@ import java.util.List;
 import org.springframework.data.jpa.domain.Specification;
 
 import com.aleksander.wordgames.model.entity.Word;
-import com.aleksander.wordgames.word.dto.filter.WordFilterRequest;
+import com.aleksander.wordgames.word.dto.request.WordFilterRequest;
 
 import jakarta.persistence.criteria.Predicate;
 

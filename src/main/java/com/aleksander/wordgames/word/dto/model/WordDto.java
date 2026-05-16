@@ -1,4 +1,4 @@
-package com.aleksander.wordgames.word.dto;
+package com.aleksander.wordgames.word.dto.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -1,4 +1,4 @@
-package com.aleksander.wordgames.word.dto.filter;
+package com.aleksander.wordgames.word.dto.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

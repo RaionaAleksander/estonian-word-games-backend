@@ -6,7 +6,7 @@ import java.util.List;
 
 import org.springframework.web.bind.annotation.*;
 
-import com.aleksander.wordgames.word.dto.filter.WordFilterRequest;
+import com.aleksander.wordgames.word.dto.request.WordFilterRequest;
 import com.aleksander.wordgames.wordsearch.dto.WordSearchRequest;
 import com.aleksander.wordgames.wordsearch.dto.WordSearchResponse;
 import com.aleksander.wordgames.wordsearch.service.WordSearchService;

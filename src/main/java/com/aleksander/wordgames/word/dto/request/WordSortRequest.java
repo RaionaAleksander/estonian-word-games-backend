@@ -1,4 +1,4 @@
-package com.aleksander.wordgames.word.dto.filter;
+package com.aleksander.wordgames.word.dto.request;
 
 import com.aleksander.wordgames.word.enums.SortOrder;
 import com.aleksander.wordgames.word.enums.SortType;
