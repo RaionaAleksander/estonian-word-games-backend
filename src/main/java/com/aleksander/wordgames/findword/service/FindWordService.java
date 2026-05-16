@@ -25,6 +25,7 @@ import com.aleksander.wordgames.generator.GameGenerator;
 import com.aleksander.wordgames.word.dto.WordDto;
 import com.aleksander.wordgames.word.dto.filter.WordFilterRequest;
 import com.aleksander.wordgames.word.dto.filter.WordSortRequest;
+import com.aleksander.wordgames.word.dto.meta.FilterMetaDto;
 import com.aleksander.wordgames.word.dto.request.WordListRequest;
 import com.aleksander.wordgames.word.enums.SortOrder;
 import com.aleksander.wordgames.word.enums.SortType;
@@ -146,12 +147,15 @@ public class FindWordService implements GameGenerator<FindWordRequest, FindWordR
 
                 List<FindWordPlacementDto> enrichedClues = enrichDefinitions(clues);
 
+                FilterMetaDto meta = wordService.buildFilterMeta(request.getFilter());
+
                 return new FindWordResponse(
                         rows,
                         cols,
                         grid,
                         mainWordPlacement,
                         enrichedClues,
+                        meta,
                         Instant.now());
             }
         }

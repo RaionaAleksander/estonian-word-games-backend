@@ -9,6 +9,7 @@ import com.aleksander.wordgames.generator.GameGenerator;
 import com.aleksander.wordgames.word.dto.WordDto;
 import com.aleksander.wordgames.word.dto.filter.WordFilterRequest;
 import com.aleksander.wordgames.word.dto.filter.WordSortRequest;
+import com.aleksander.wordgames.word.dto.meta.FilterMetaDto;
 import com.aleksander.wordgames.word.dto.request.WordListRequest;
 import com.aleksander.wordgames.word.enums.SortOrder;
 import com.aleksander.wordgames.word.enums.SortType;
@@ -110,12 +111,15 @@ public class WordSearchService implements GameGenerator<WordSearchRequest, WordS
 
                 fillRandom(grid);
 
+                FilterMetaDto meta = wordService.buildFilterMeta(request.getFilter());
+
                 return new WordSearchResponse(
                         rows,
                         cols,
                         grid,
                         words,
                         placements,
+                        meta,
                         Instant.now(),
                         warning);
             }

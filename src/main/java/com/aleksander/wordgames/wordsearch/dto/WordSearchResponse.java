@@ -6,6 +6,8 @@ import lombok.Data;
 import java.time.Instant;
 import java.util.List;
 
+import com.aleksander.wordgames.word.dto.meta.FilterMetaDto;
+
 @Data
 @AllArgsConstructor
 public class WordSearchResponse {
@@ -19,6 +21,8 @@ public class WordSearchResponse {
     private List<String> words;
 
     private List<PlacementDto> placements;
+
+    private FilterMetaDto filters;
 
     private Instant generatedAt;
 

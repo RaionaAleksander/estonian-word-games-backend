@@ -15,6 +15,9 @@ import com.aleksander.wordgames.word.dto.WordPatternResponse;
 import com.aleksander.wordgames.word.dto.WordResponse;
 import com.aleksander.wordgames.word.dto.filter.WordFilterRequest;
 import com.aleksander.wordgames.word.dto.filter.WordSortRequest;
+import com.aleksander.wordgames.word.dto.meta.FilterMetaDto;
+import com.aleksander.wordgames.word.dto.meta.SortMetaDto;
+import com.aleksander.wordgames.word.dto.meta.WordRequestMetaDto;
 import com.aleksander.wordgames.word.dto.request.WordListRequest;
 import com.aleksander.wordgames.word.dto.request.WordPageRequest;
 import com.aleksander.wordgames.word.enums.SortOrder;
@@ -43,9 +46,15 @@ public class WordService {
 
         List<WordDto> result = findWords(request);
 
+        WordRequestMetaDto meta = buildWordRequestMeta(
+                request.getFilter(),
+                request.getSort(),
+                request.getRandom());
+
         return new WordResponse(
                 result.size(),
                 result,
+                meta,
                 Instant.now());
     }
 
@@ -60,6 +69,11 @@ public class WordService {
 
         int totalPages = (int) Math.ceil((double) totalElements / size);
 
+        WordRequestMetaDto meta = buildWordRequestMeta(
+                request.getFilter(),
+                request.getSort(),
+                false);
+
         return new WordPageResponse(
                 totalElements,
                 totalPages,
@@ -67,6 +81,7 @@ public class WordService {
                 size,
                 result.size(),
                 result,
+                meta,
                 Instant.now());
     }
 
@@ -337,5 +352,79 @@ public class WordService {
         return (size != null && size > 0)
                 ? size
                 : 20;
+    }
+
+    /* Meta */
+
+    public FilterMetaDto buildFilterMeta(WordFilterRequest request) {
+        FilterMetaDto meta = new FilterMetaDto();
+
+        if (request == null) {
+            return meta;
+        }
+
+        if (request.getMinLength() != null) {
+            meta.setMinLength(request.getMinLength());
+        }
+
+        if (request.getMaxLength() != null) {
+            meta.setMaxLength(request.getMaxLength());
+        }
+
+        if (request.getStartsWith() != null) {
+            meta.setStartsWith(request.getStartsWith());
+        }
+
+        if (request.getEndsWith() != null) {
+            meta.setEndsWith(request.getEndsWith());
+        }
+
+        if (request.getContains() != null && !request.getContains().isEmpty()) {
+            meta.setContains(request.getContains());
+        }
+
+        if (request.getNotContains() != null && !request.getNotContains().isEmpty()) {
+            meta.setNotContains(request.getNotContains());
+        }
+
+        if (request.getIncludeCategories() != null && !request.getIncludeCategories().isEmpty()) {
+            meta.setIncludeCategories(request.getIncludeCategories());
+        }
+
+        if (request.getExcludeCategories() != null && !request.getExcludeCategories().isEmpty()) {
+            meta.setExcludeCategories(request.getExcludeCategories());
+        }
+
+        if (request.getPattern() != null) {
+            meta.setPattern(request.getPattern());
+        }
+
+        if (request.getExcludedWords() != null && !request.getExcludedWords().isEmpty()) {
+            meta.setExcludedWords(request.getExcludedWords());
+        }
+
+        return meta;
+    }
+
+    public SortMetaDto buildSortMeta(WordSortRequest request) {
+
+        if (request == null || request.getSort() == null) {
+            return null;
+        }
+
+        return new SortMetaDto(
+                request.getSort(),
+                request.getOrder());
+    }
+
+    public WordRequestMetaDto buildWordRequestMeta(
+            WordFilterRequest filter,
+            WordSortRequest sort,
+            Boolean random) {
+
+        return new WordRequestMetaDto(
+                buildFilterMeta(filter),
+                buildSortMeta(sort),
+                random);
     }
 }

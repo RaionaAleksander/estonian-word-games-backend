@@ -3,6 +3,8 @@ package com.aleksander.wordgames.word.dto;
 import java.time.Instant;
 import java.util.List;
 
+import com.aleksander.wordgames.word.dto.meta.WordRequestMetaDto;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -21,6 +23,8 @@ public class WordPageResponse {
     private int count;
 
     private List<WordDto> words;
+
+    private WordRequestMetaDto meta;
 
     private Instant generatedAt;
 }
