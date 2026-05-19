@@ -10,6 +10,7 @@ import com.aleksander.wordgames.savedgame.dto.SavedGameResponse;
 import com.aleksander.wordgames.savedgame.exception.SavedGameNotFoundException;
 import com.aleksander.wordgames.savedgame.exception.SavedGameParseException;
 import com.aleksander.wordgames.savedgame.repository.SavedGameRepository;
+import com.aleksander.wordgames.savedgame.validator.SavedGameValidator;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -38,16 +39,11 @@ public class SavedGameService {
     }
 
     public SavedGameResponse save(JsonNode payload) {
-
-        GameType type = detectGameType(payload);
-
-        System.out.println(payload.toPrettyString());
+        GameType type = SavedGameValidator.validate(payload);
 
         SavedGame entity = new SavedGame();
         entity.setGameType(type);
         entity.setPayload(payload.toString());
-
-        System.out.println(entity.getPayload());
         entity.setCreatedAt(Instant.now());
 
         repository.save(entity);
@@ -56,20 +52,5 @@ public class SavedGameService {
                 entity.getId(),
                 entity.getGameType(),
                 entity.getCreatedAt());
-    }
-
-    // ---------------- helpers ----------------
-
-    private GameType detectGameType(JsonNode payload) {
-
-        if (payload.has("grid") && payload.has("placements")) {
-            return GameType.WORD_SEARCH;
-        }
-
-        if (payload.has("mainWord") && payload.has("clues")) {
-            return GameType.FIND_WORD;
-        }
-
-        throw new IllegalArgumentException("Unknown game type");
     }
 }
