@@ -15,6 +15,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -52,5 +53,13 @@ public class SavedGameService {
                 entity.getId(),
                 entity.getGameType(),
                 entity.getCreatedAt());
+    }
+
+    @Transactional
+    public void delete(Long id) {
+        SavedGame game = repository.findById(id)
+                .orElseThrow(() -> new SavedGameNotFoundException(id));
+
+        repository.delete(game);
     }
 }

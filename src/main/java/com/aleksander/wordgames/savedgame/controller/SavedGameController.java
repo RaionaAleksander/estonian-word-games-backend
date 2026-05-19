@@ -1,5 +1,6 @@
 package com.aleksander.wordgames.savedgame.controller;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,5 +29,10 @@ public class SavedGameController {
     @PostMapping
     public SavedGameResponse save(@RequestBody JsonNode payload) {
         return savedGameService.save(payload);
+    }
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id) {
+        savedGameService.delete(id);
     }
 }
