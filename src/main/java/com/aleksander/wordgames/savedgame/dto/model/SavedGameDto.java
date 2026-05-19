@@ -1,15 +1,17 @@
-package com.aleksander.wordgames.savedgame.dto;
+package com.aleksander.wordgames.savedgame.dto.model;
 
 import java.time.Instant;
 
 import com.aleksander.wordgames.common.enums.GameType;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class SavedGameResponse {
+public class SavedGameDto {
 
     private Long id;
 
