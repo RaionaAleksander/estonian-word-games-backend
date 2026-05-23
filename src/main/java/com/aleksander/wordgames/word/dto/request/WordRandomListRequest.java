@@ -4,13 +4,9 @@ import lombok.*;
 
 @Data
 @AllArgsConstructor
-public class WordListRequest {
+public class WordRandomListRequest {
 
     private WordFilterRequest filter;
 
-    private WordSortRequest sort;
-
     private Integer limit;
-
-    private Boolean random;
 }

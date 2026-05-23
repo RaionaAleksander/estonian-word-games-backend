@@ -26,10 +26,7 @@ import com.aleksander.wordgames.generator.GameGenerator;
 import com.aleksander.wordgames.word.dto.meta.FilterMetaDto;
 import com.aleksander.wordgames.word.dto.model.WordDto;
 import com.aleksander.wordgames.word.dto.request.WordFilterRequest;
-import com.aleksander.wordgames.word.dto.request.WordListRequest;
-import com.aleksander.wordgames.word.dto.request.WordSortRequest;
-import com.aleksander.wordgames.word.enums.SortOrder;
-import com.aleksander.wordgames.word.enums.SortType;
+import com.aleksander.wordgames.word.dto.request.WordRandomListRequest;
 import com.aleksander.wordgames.word.service.WordService;
 
 import lombok.RequiredArgsConstructor;
@@ -185,13 +182,11 @@ public class FindWordService implements GameGenerator<FindWordRequest, FindWordR
         filter.setContains(mergeContains(baseRequest, letter));
         filter.setExcludedWords(mergeExcluded(baseRequest, usedWords));
 
-        WordListRequest request = new WordListRequest(
+        WordRandomListRequest request = new WordRandomListRequest(
                 filter,
-                new WordSortRequest(SortType.LENGTH, SortOrder.DESC),
-                20,
-                true);
+                20);
 
-        List<WordDto> candidates = wordService.findWords(request);
+        List<WordDto> candidates = wordService.findRandomWords(request);
 
         for (WordDto dto : candidates) {
 

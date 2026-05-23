@@ -10,10 +10,7 @@ import com.aleksander.wordgames.generator.GameGenerator;
 import com.aleksander.wordgames.word.dto.meta.FilterMetaDto;
 import com.aleksander.wordgames.word.dto.model.WordDto;
 import com.aleksander.wordgames.word.dto.request.WordFilterRequest;
-import com.aleksander.wordgames.word.dto.request.WordListRequest;
-import com.aleksander.wordgames.word.dto.request.WordSortRequest;
-import com.aleksander.wordgames.word.enums.SortOrder;
-import com.aleksander.wordgames.word.enums.SortType;
+import com.aleksander.wordgames.word.dto.request.WordRandomListRequest;
 import com.aleksander.wordgames.word.service.WordService;
 import com.aleksander.wordgames.wordsearch.dto.PlacementDto;
 import com.aleksander.wordgames.wordsearch.dto.WordSearchRequest;
@@ -53,17 +50,11 @@ public class WordSearchService implements GameGenerator<WordSearchRequest, WordS
             filter.setMaxLength(Math.max(rows, cols));
         }
 
-        WordSortRequest sort = new WordSortRequest(
-                SortType.LENGTH,
-                SortOrder.DESC);
-
-        WordListRequest listRequest = new WordListRequest(
+        WordRandomListRequest listRequest = new WordRandomListRequest(
                 filter,
-                sort,
-                request.getWordsCount(),
-                true);
+                request.getWordsCount());
 
-        List<String> words = wordService.findWords(listRequest)
+        List<String> words = wordService.findRandomWords(listRequest)
                 .stream()
                 .map(WordDto::getLemma)
                 .toList();

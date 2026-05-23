@@ -12,7 +12,7 @@ import com.aleksander.wordgames.word.dto.meta.SortMetaDto;
 import com.aleksander.wordgames.word.dto.meta.WordRequestMetaDto;
 import com.aleksander.wordgames.word.dto.model.WordDto;
 import com.aleksander.wordgames.word.dto.request.WordFilterRequest;
-import com.aleksander.wordgames.word.dto.request.WordListRequest;
+import com.aleksander.wordgames.word.dto.request.WordRandomListRequest;
 import com.aleksander.wordgames.word.dto.request.WordPageRequest;
 import com.aleksander.wordgames.word.dto.request.WordSortRequest;
 import com.aleksander.wordgames.word.dto.response.WordDefinitionsResponse;
@@ -42,14 +42,13 @@ public class WordService {
     private final WordRepository wordRepository;
     private final WordDefinitionRepository definitionRepository;
 
-    public WordResponse getWordsResponse(WordListRequest request) {
+    public WordResponse getRandomWordsResponse(WordRandomListRequest request) {
 
-        List<WordDto> result = findWords(request);
+        List<WordDto> result = findRandomWords(request);
 
         WordRequestMetaDto meta = buildWordRequestMeta(
                 request.getFilter(),
-                request.getSort(),
-                request.getRandom());
+                null);
 
         return new WordResponse(
                 result.size(),
@@ -71,8 +70,7 @@ public class WordService {
 
         WordRequestMetaDto meta = buildWordRequestMeta(
                 request.getFilter(),
-                request.getSort(),
-                false);
+                request.getSort());
 
         return new WordPageResponse(
                 totalElements,
@@ -226,37 +224,28 @@ public class WordService {
         return wordRepository.findAll(specification);
     }
 
-    public List<WordDto> processWords(List<Word> words, WordListRequest request) {
+    public List<WordDto> processRandomWords(
+            List<Word> words,
+            WordRandomListRequest request) {
+
         List<WordDto> result = words.stream()
                 .map(this::toDto)
                 .collect(Collectors.toList());
 
-        // random + limit + sort logic
-        if (Boolean.TRUE.equals(request.getRandom())) {
+        Collections.shuffle(result);
 
-            Collections.shuffle(result);
+        if (request.getLimit() != null
+                && request.getLimit() < result.size()) {
 
-            if (request.getLimit() != null && request.getLimit() < result.size()) {
-                result = result.subList(0, request.getLimit());
-            }
-
-            result = sort(result, request.getSort());
-
-        } else {
-
-            result = sort(result, request.getSort());
-
-            if (request.getLimit() != null && request.getLimit() < result.size()) {
-                result = result.subList(0, request.getLimit());
-            }
+            result = result.subList(0, request.getLimit());
         }
 
         return result;
     }
 
-    public List<WordDto> findWords(WordListRequest request) {
+    public List<WordDto> findRandomWords(WordRandomListRequest request) {
         List<Word> filtered = filterWords(request.getFilter());
-        return processWords(filtered, request);
+        return processRandomWords(filtered, request);
     }
 
     public String generatePattern(String word, int visibleLetters) {
@@ -357,53 +346,22 @@ public class WordService {
     /* Meta */
 
     public FilterMetaDto buildFilterMeta(WordFilterRequest request) {
-        FilterMetaDto meta = new FilterMetaDto();
 
         if (request == null) {
-            return meta;
+            return null;
         }
 
-        if (request.getMinLength() != null) {
-            meta.setMinLength(request.getMinLength());
-        }
-
-        if (request.getMaxLength() != null) {
-            meta.setMaxLength(request.getMaxLength());
-        }
-
-        if (request.getStartsWith() != null) {
-            meta.setStartsWith(request.getStartsWith());
-        }
-
-        if (request.getEndsWith() != null) {
-            meta.setEndsWith(request.getEndsWith());
-        }
-
-        if (request.getContains() != null && !request.getContains().isEmpty()) {
-            meta.setContains(request.getContains());
-        }
-
-        if (request.getNotContains() != null && !request.getNotContains().isEmpty()) {
-            meta.setNotContains(request.getNotContains());
-        }
-
-        if (request.getIncludeCategories() != null && !request.getIncludeCategories().isEmpty()) {
-            meta.setIncludeCategories(request.getIncludeCategories());
-        }
-
-        if (request.getExcludeCategories() != null && !request.getExcludeCategories().isEmpty()) {
-            meta.setExcludeCategories(request.getExcludeCategories());
-        }
-
-        if (request.getPattern() != null) {
-            meta.setPattern(request.getPattern());
-        }
-
-        if (request.getExcludedWords() != null && !request.getExcludedWords().isEmpty()) {
-            meta.setExcludedWords(request.getExcludedWords());
-        }
-
-        return meta;
+        return new FilterMetaDto(
+                request.getMinLength(),
+                request.getMaxLength(),
+                request.getStartsWith(),
+                request.getEndsWith(),
+                request.getContains(),
+                request.getNotContains(),
+                request.getIncludeCategories(),
+                request.getExcludeCategories(),
+                request.getPattern(),
+                request.getExcludedWords());
     }
 
     public SortMetaDto buildSortMeta(WordSortRequest request) {
@@ -419,12 +377,10 @@ public class WordService {
 
     public WordRequestMetaDto buildWordRequestMeta(
             WordFilterRequest filter,
-            WordSortRequest sort,
-            Boolean random) {
+            WordSortRequest sort) {
 
         return new WordRequestMetaDto(
                 buildFilterMeta(filter),
-                buildSortMeta(sort),
-                random);
+                buildSortMeta(sort));
     }
 }

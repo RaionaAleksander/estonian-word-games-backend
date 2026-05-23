@@ -7,7 +7,7 @@ import java.util.List;
 import org.springframework.web.bind.annotation.*;
 
 import com.aleksander.wordgames.word.dto.request.WordFilterRequest;
-import com.aleksander.wordgames.word.dto.request.WordListRequest;
+import com.aleksander.wordgames.word.dto.request.WordRandomListRequest;
 import com.aleksander.wordgames.word.dto.request.WordPageRequest;
 import com.aleksander.wordgames.word.dto.request.WordSortRequest;
 import com.aleksander.wordgames.word.dto.response.WordDefinitionsResponse;
@@ -24,117 +24,108 @@ import com.aleksander.wordgames.word.service.WordService;
 @RequestMapping("/api/v1/words")
 public class WordController {
 
-    private final WordService wordService;
+	private final WordService wordService;
 
-    @GetMapping
-    public WordResponse getWords(
-            @RequestParam(required = false) Integer minLength,
-            @RequestParam(required = false) Integer maxLength,
-            @RequestParam(required = false) String startsWith,
-            @RequestParam(required = false) String endsWith,
-            @RequestParam(required = false) List<String> contains,
-            @RequestParam(required = false) List<String> notContains,
-            @RequestParam(required = false) List<String> includeCategories,
-            @RequestParam(required = false) List<String> excludeCategories,
-            @RequestParam(required = false) String pattern,
-            @RequestParam(required = false) List<String> excludedWords,
-            @RequestParam(defaultValue = "20") Integer limit,
-            @RequestParam(required = false) Boolean random,
-            @RequestParam(required = false) SortType sort,
-            @RequestParam(required = false) SortOrder order) {
+	@GetMapping
+	public WordPageResponse getWords(
 
-        WordFilterRequest filterRequest = new WordFilterRequest(
-                minLength,
-                maxLength,
-                startsWith,
-                endsWith,
-                contains,
-                notContains,
-                includeCategories,
-                excludeCategories,
-                pattern,
-                excludedWords);
+			// filters
+			@RequestParam(required = false) Integer minLength,
+			@RequestParam(required = false) Integer maxLength,
+			@RequestParam(required = false) String startsWith,
+			@RequestParam(required = false) String endsWith,
+			@RequestParam(required = false) List<String> contains,
+			@RequestParam(required = false) List<String> notContains,
+			@RequestParam(required = false) List<String> includeCategories,
+			@RequestParam(required = false) List<String> excludeCategories,
+			@RequestParam(required = false) String pattern,
+			@RequestParam(required = false) List<String> excludedWords,
 
-        WordSortRequest sortRequest = new WordSortRequest(
-                sort,
-                order);
+			// sorting
+			@RequestParam(required = false) SortType sort,
+			@RequestParam(required = false) SortOrder order,
 
-        WordListRequest request = new WordListRequest(
-                filterRequest,
-                sortRequest,
-                limit,
-                random);
+			// pagination
+			@RequestParam(defaultValue = "0") Integer page,
+			@RequestParam(defaultValue = "20") Integer size) {
 
-        return wordService.getWordsResponse(request);
-    }
+		WordFilterRequest filter = new WordFilterRequest(
+				minLength,
+				maxLength,
+				startsWith,
+				endsWith,
+				contains,
+				notContains,
+				includeCategories,
+				excludeCategories,
+				pattern,
+				excludedWords);
 
-    @GetMapping("/page")
-    public WordPageResponse getWordsPage(
+		WordSortRequest sortRequest = new WordSortRequest(
+				sort,
+				order);
 
-            // filters
-            @RequestParam(required = false) Integer minLength,
-            @RequestParam(required = false) Integer maxLength,
-            @RequestParam(required = false) String startsWith,
-            @RequestParam(required = false) String endsWith,
-            @RequestParam(required = false) List<String> contains,
-            @RequestParam(required = false) List<String> notContains,
-            @RequestParam(required = false) List<String> includeCategories,
-            @RequestParam(required = false) List<String> excludeCategories,
-            @RequestParam(required = false) String pattern,
-            @RequestParam(required = false) List<String> excludedWords,
+		WordPageRequest request = new WordPageRequest(
+				filter,
+				sortRequest,
+				page,
+				size);
 
-            // sorting
-            @RequestParam(required = false) SortType sort,
-            @RequestParam(required = false) SortOrder order,
+		return wordService.getWordsPageResponse(request);
+	}
 
-            // pagination
-            @RequestParam(defaultValue = "0") Integer page,
-            @RequestParam(defaultValue = "20") Integer size) {
+	@GetMapping("/random")
+	public WordResponse getRandomWords(
+			@RequestParam(required = false) Integer minLength,
+			@RequestParam(required = false) Integer maxLength,
+			@RequestParam(required = false) String startsWith,
+			@RequestParam(required = false) String endsWith,
+			@RequestParam(required = false) List<String> contains,
+			@RequestParam(required = false) List<String> notContains,
+			@RequestParam(required = false) List<String> includeCategories,
+			@RequestParam(required = false) List<String> excludeCategories,
+			@RequestParam(required = false) String pattern,
+			@RequestParam(required = false) List<String> excludedWords,
+			@RequestParam(defaultValue = "20") Integer limit) {
 
-        WordFilterRequest filter = new WordFilterRequest(
-                minLength,
-                maxLength,
-                startsWith,
-                endsWith,
-                contains,
-                notContains,
-                includeCategories,
-                excludeCategories,
-                pattern,
-                excludedWords);
+		WordFilterRequest filterRequest = new WordFilterRequest(
+				minLength,
+				maxLength,
+				startsWith,
+				endsWith,
+				contains,
+				notContains,
+				includeCategories,
+				excludeCategories,
+				pattern,
+				excludedWords);
 
-        WordSortRequest sortRequest = new WordSortRequest(
-                sort,
-                order);
+		WordRandomListRequest request = new WordRandomListRequest(
+				filterRequest,
+				limit);
 
-        WordPageRequest request = new WordPageRequest(
-                filter,
-                sortRequest,
-                page,
-                size);
+		return wordService.getRandomWordsResponse(request);
+	}
 
-        return wordService.getWordsPageResponse(request);
-    }
+	@GetMapping("/exists")
+	public WordExistsResponse exists(@RequestParam String word) {
+		return wordService.checkExists(word);
+	}
 
-    @GetMapping("/exists")
-    public WordExistsResponse exists(@RequestParam String word) {
-        return wordService.checkExists(word);
-    }
+	@GetMapping("/definitions")
+	public WordDefinitionsResponse getDefinitions(
+			@RequestParam String word,
+			@RequestParam(required = false) Integer limit,
+			@RequestParam(defaultValue = "false") boolean random) {
 
-    @GetMapping("/definitions")
-    public WordDefinitionsResponse getDefinitions(
-            @RequestParam String word,
-            @RequestParam(required = false) Integer limit,
-            @RequestParam(defaultValue = "false") boolean random) {
+		return wordService.getDefinitionsResponse(word, limit, random);
+	}
 
-        return wordService.getDefinitionsResponse(word, limit, random);
-    }
+	@GetMapping("/pattern")
+	public WordPatternResponse getPattern(
+			@RequestParam String word,
+			@RequestParam(required = false) Integer visibleLetters) {
 
-    @GetMapping("/pattern")
-    public WordPatternResponse getPattern(
-            @RequestParam String word,
-            @RequestParam(required = false) Integer visibleLetters) {
-
-        return wordService.getPatternResponse(word, visibleLetters);
-    }
+		return wordService.getPatternResponse(word, visibleLetters);
+	}
 }
