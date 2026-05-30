@@ -369,12 +369,18 @@ public class WordService {
     public SortMetaDto buildSortMeta(WordSortRequest request) {
 
         if (request == null || request.getSort() == null) {
-            return null;
+            return new SortMetaDto(null, null);
+        }
+
+        SortOrder order = request.getOrder();
+
+        if (order == null) {
+            order = SortOrder.ASC;
         }
 
         return new SortMetaDto(
                 request.getSort(),
-                request.getOrder());
+                order);
     }
 
     public WordRequestMetaDto buildWordRequestMeta(
