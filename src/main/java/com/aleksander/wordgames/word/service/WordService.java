@@ -16,6 +16,7 @@ import com.aleksander.wordgames.word.dto.request.WordRandomListRequest;
 import com.aleksander.wordgames.word.dto.request.WordPageRequest;
 import com.aleksander.wordgames.word.dto.request.WordSortRequest;
 import com.aleksander.wordgames.word.dto.response.WordDefinitionsResponse;
+import com.aleksander.wordgames.word.dto.response.WordDetailsResponse;
 import com.aleksander.wordgames.word.dto.response.WordExistsResponse;
 import com.aleksander.wordgames.word.dto.response.WordPageResponse;
 import com.aleksander.wordgames.word.dto.response.WordPatternResponse;
@@ -33,6 +34,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -81,6 +83,48 @@ public class WordService {
                 result,
                 meta,
                 Instant.now());
+    }
+
+    public WordDetailsResponse getWordDetails(String word) {
+        Instant now = Instant.now();
+
+        if (word == null || word.isBlank()) {
+            return new WordDetailsResponse(
+                    word,
+                    false,
+                    null,
+                    null,
+                    null,
+                    List.of(),
+                    now);
+        }
+
+        String normalized = normalize(word);
+
+        Optional<Word> optionalWord = wordRepository.findByLemma(normalized);
+
+        if (optionalWord.isEmpty()) {
+
+            return new WordDetailsResponse(
+                    word,
+                    false,
+                    null,
+                    null,
+                    null,
+                    List.of(),
+                    now);
+        }
+
+        Word entity = optionalWord.get();
+
+        return new WordDetailsResponse(
+                word,
+                true,
+                entity.getLemma(),
+                entity.getLength(),
+                entity.getCategory(),
+                getDefinitions(entity.getLemma(), null, false),
+                now);
     }
 
     public WordExistsResponse checkExists(String word) {

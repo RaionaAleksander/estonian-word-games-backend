@@ -11,6 +11,7 @@ import com.aleksander.wordgames.word.dto.request.WordRandomListRequest;
 import com.aleksander.wordgames.word.dto.request.WordPageRequest;
 import com.aleksander.wordgames.word.dto.request.WordSortRequest;
 import com.aleksander.wordgames.word.dto.response.WordDefinitionsResponse;
+import com.aleksander.wordgames.word.dto.response.WordDetailsResponse;
 import com.aleksander.wordgames.word.dto.response.WordExistsResponse;
 import com.aleksander.wordgames.word.dto.response.WordPageResponse;
 import com.aleksander.wordgames.word.dto.response.WordPatternResponse;
@@ -112,6 +113,11 @@ public class WordController {
 				limit);
 
 		return wordService.getRandomWordsResponse(request);
+	}
+
+	@GetMapping("/{lemma}")
+	public WordDetailsResponse getWord(@PathVariable String lemma) {
+		return wordService.getWordDetails(lemma);
 	}
 
 	@GetMapping("/exists")
