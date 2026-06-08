@@ -10,5 +10,5 @@ public record WordDetailsResponse(
         Integer length,
         String category,
         List<String> definitions,
-        Instant generatedAt) {
+        Instant fetchedAt) {
 }
