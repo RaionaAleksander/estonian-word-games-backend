@@ -2,10 +2,7 @@ package com.aleksander.wordgames.findword.controller;
 
 import java.util.List;
 
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.aleksander.wordgames.common.enums.Direction;
 import com.aleksander.wordgames.findword.dto.FindWordRequest;
@@ -22,7 +19,7 @@ public class FindWordController {
 
     private final FindWordService findWordService;
 
-    @PostMapping("/generate")
+    @GetMapping("/generate")
     public FindWordResponse generate(
             @RequestParam String mainWord,
             @RequestParam(defaultValue = "10") Integer maxCrossLength,

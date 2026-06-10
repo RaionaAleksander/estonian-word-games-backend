@@ -1,7 +1,5 @@
 package com.aleksander.wordgames.wordsearch.controller;
 
-import lombok.RequiredArgsConstructor;
-
 import java.util.List;
 
 import org.springframework.web.bind.annotation.*;
@@ -11,6 +9,8 @@ import com.aleksander.wordgames.wordsearch.dto.WordSearchRequest;
 import com.aleksander.wordgames.wordsearch.dto.WordSearchResponse;
 import com.aleksander.wordgames.wordsearch.service.WordSearchService;
 
+import lombok.RequiredArgsConstructor;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/games/word-search")
@@ -18,7 +18,7 @@ public class WordSearchController {
 
     private final WordSearchService wordSearchService;
 
-    @PostMapping("/generate")
+    @GetMapping("/generate")
     public WordSearchResponse generate(
             @RequestParam(defaultValue = "10") int rows,
             @RequestParam(defaultValue = "10") int cols,
