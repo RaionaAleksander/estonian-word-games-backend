@@ -20,27 +20,21 @@ public class SavedGameValidator {
     }
 
     private static void validateBase(JsonNode payload) {
-
         require(payload, "gameType");
         require(payload, "generatedAt");
 
+        String generatedAt = payload.get("generatedAt").asText();
         try {
-            Instant.parse(payload.get("generatedAt").asText());
-        } catch (Exception e) {
-            throw new SavedGameValidationException("Invalid generatedAt: " + payload.get("generatedAt").asText());
+            Instant.parse(generatedAt);
+        } catch (IllegalArgumentException e) {
+            throw new SavedGameValidationException("Invalid generatedAt: " + generatedAt);
         }
     }
 
     public static void validateByType(JsonNode payload, GameType type) {
-
         switch (type) {
-
             case FIND_WORD -> validateFindWord(payload);
-
             case WORD_SEARCH -> validateWordSearch(payload);
-
-            default -> throw new SavedGameValidationException(
-                    "Unsupported gameType: " + type);
         }
     }
 
@@ -63,11 +57,11 @@ public class SavedGameValidator {
     }
 
     private static GameType parseGameType(JsonNode payload) {
-
+        String gameType = payload.get("gameType").asText();
         try {
-            return GameType.valueOf(payload.get("gameType").asText());
-        } catch (Exception e) {
-            throw new SavedGameValidationException("Invalid gameType: " + payload.get("gameType").asText());
+            return GameType.valueOf(gameType);
+        } catch (IllegalArgumentException e) {
+            throw new SavedGameValidationException("Invalid gameType: " + gameType);
         }
     }
 

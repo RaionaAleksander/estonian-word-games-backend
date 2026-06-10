@@ -22,7 +22,6 @@ import com.aleksander.wordgames.word.dto.response.WordPageResponse;
 import com.aleksander.wordgames.word.dto.response.WordPatternResponse;
 import com.aleksander.wordgames.word.dto.response.WordResponse;
 import com.aleksander.wordgames.word.enums.SortOrder;
-import com.aleksander.wordgames.word.exception.InvalidSortException;
 import com.aleksander.wordgames.word.exception.WordNotFoundException;
 import com.aleksander.wordgames.word.repository.WordDefinitionRepository;
 import com.aleksander.wordgames.word.repository.WordRepository;
@@ -212,7 +211,6 @@ public class WordService {
         Comparator<WordDto> comparator = switch (request.getSort()) {
             case LENGTH -> Comparator.comparing(WordDto::getLength);
             case ALPHABET -> Comparator.comparing(WordDto::getLemma);
-            default -> throw new InvalidSortException("Unsupported sort type: " + request.getSort());
         };
 
         if (request.getOrder() == SortOrder.DESC) {

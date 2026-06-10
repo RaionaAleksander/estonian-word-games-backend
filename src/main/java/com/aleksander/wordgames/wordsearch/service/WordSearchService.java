@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 
 import com.aleksander.wordgames.common.enums.Direction;
 import com.aleksander.wordgames.common.enums.GameType;
-import com.aleksander.wordgames.exception.InvalidDirectionException;
 import com.aleksander.wordgames.generator.GameGenerator;
 import com.aleksander.wordgames.word.dto.meta.FilterMetaDto;
 import com.aleksander.wordgames.word.dto.model.WordDto;
@@ -228,7 +227,7 @@ public class WordSearchService implements GameGenerator<WordSearchRequest, WordS
                     col = random.nextInt(word.length() - 1, cols);
                 }
 
-                default -> throw new InvalidDirectionException(dir.name());
+                default -> throw new IllegalStateException("Unexpected direction: " + dir);
             }
 
             if (!canPlaceBounds(word, row, col, dir, rows, cols)) {

@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
 
 import com.aleksander.wordgames.common.enums.Direction;
 import com.aleksander.wordgames.common.enums.GameType;
-import com.aleksander.wordgames.exception.InvalidDirectionException;
 import com.aleksander.wordgames.findword.dto.FindWordPlacementDto;
 import com.aleksander.wordgames.findword.dto.FindWordRequest;
 import com.aleksander.wordgames.findword.dto.FindWordResponse;
@@ -58,7 +57,7 @@ public class FindWordService implements GameGenerator<FindWordRequest, FindWordR
 
         if (direction != Direction.RIGHT
                 && direction != Direction.DOWN) {
-            throw new InvalidDirectionException(direction.name());
+            throw new IllegalStateException("Unexpected direction: " + direction.name());
         }
 
         int maxCrossLength = request.getMaxCrossLength();
@@ -221,8 +220,7 @@ public class FindWordService implements GameGenerator<FindWordRequest, FindWordR
                     col = axisIndex - wordIndex;
                 }
 
-                default -> throw new InvalidDirectionException(
-                        clueDirection.name());
+                default -> throw new IllegalStateException("Unexpected direction: " + clueDirection.name());
             }
 
             return new FindWordPlacementDto(
@@ -295,7 +293,7 @@ public class FindWordService implements GameGenerator<FindWordRequest, FindWordR
                 }
             }
 
-            default -> throw new InvalidDirectionException(direction.name());
+            default -> throw new IllegalStateException("Unexpected direction: " + direction.name());
         }
     }
 
