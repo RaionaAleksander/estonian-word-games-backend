@@ -1,4 +1,4 @@
-package com.aleksander.wordgames.common.dto;
+package com.aleksander.wordgames.config.dto;
 
 import java.util.List;
 

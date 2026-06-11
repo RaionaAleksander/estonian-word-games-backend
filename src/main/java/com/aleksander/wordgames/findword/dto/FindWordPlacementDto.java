@@ -1,6 +1,6 @@
 package com.aleksander.wordgames.findword.dto;
 
-import com.aleksander.wordgames.common.enums.Direction;
+import com.aleksander.wordgames.findword.enums.FindWordDirection;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,5 +16,5 @@ public class FindWordPlacementDto {
     private int row;
     private int col;
 
-    private Direction direction;
+    private FindWordDirection direction;
 }

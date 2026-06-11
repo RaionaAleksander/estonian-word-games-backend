@@ -1,6 +1,6 @@
 package com.aleksander.wordgames.wordsearch.dto;
 
-import com.aleksander.wordgames.common.enums.Direction;
+import com.aleksander.wordgames.wordsearch.enums.WordSearchDirection;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,5 +14,5 @@ public class PlacementDto {
     private int row;
     private int col;
 
-    private Direction direction;
+    private WordSearchDirection direction;
 }

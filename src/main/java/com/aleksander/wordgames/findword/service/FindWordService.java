@@ -12,12 +12,12 @@ import java.util.Set;
 
 import org.springframework.stereotype.Service;
 
-import com.aleksander.wordgames.common.enums.Direction;
 import com.aleksander.wordgames.common.enums.GameType;
 import com.aleksander.wordgames.findword.dto.FindWordPlacementDto;
 import com.aleksander.wordgames.findword.dto.FindWordRequest;
 import com.aleksander.wordgames.findword.dto.FindWordResponse;
 import com.aleksander.wordgames.findword.dto.MainWordPlacementDto;
+import com.aleksander.wordgames.findword.enums.FindWordDirection;
 import com.aleksander.wordgames.findword.exception.FindWordGenerationException;
 import com.aleksander.wordgames.findword.exception.FindWordValidationException;
 import com.aleksander.wordgames.findword.validation.FindWordValidator;
@@ -49,15 +49,10 @@ public class FindWordService implements GameGenerator<FindWordRequest, FindWordR
             throw new FindWordValidationException("Main word not found in dictionary: " + mainWord);
         }
 
-        Direction direction = request.getMainWordDirection();
+        FindWordDirection direction = request.getMainWordDirection();
 
         if (direction == null) {
             direction = pickMainWordDirection();
-        }
-
-        if (direction != Direction.RIGHT
-                && direction != Direction.DOWN) {
-            throw new IllegalStateException("Unexpected direction: " + direction.name());
         }
 
         int maxCrossLength = request.getMaxCrossLength();
@@ -77,7 +72,7 @@ public class FindWordService implements GameGenerator<FindWordRequest, FindWordR
         int mainRow;
         int mainCol;
 
-        if (direction == Direction.RIGHT) {
+        if (direction == FindWordDirection.RIGHT) {
 
             rows = maxCrossLength;
             cols = mainWord.length();
@@ -109,9 +104,7 @@ public class FindWordService implements GameGenerator<FindWordRequest, FindWordR
                 mainCol,
                 direction);
 
-        Direction clueDirection = direction == Direction.RIGHT
-                ? Direction.DOWN
-                : Direction.RIGHT;
+        FindWordDirection clueDirection = direction.opposite();
 
         for (int attempt = 0; attempt < 100; attempt++) {
             boolean success = true;
@@ -168,7 +161,7 @@ public class FindWordService implements GameGenerator<FindWordRequest, FindWordR
             char letter,
             int mainWordIndex,
             int axisIndex,
-            Direction clueDirection,
+            FindWordDirection clueDirection,
             int crossLength,
             Set<String> usedWords,
             FindWordRequest baseRequest) {
@@ -255,10 +248,10 @@ public class FindWordService implements GameGenerator<FindWordRequest, FindWordR
         return validIndexes;
     }
 
-    private Direction pickMainWordDirection() {
+    private FindWordDirection pickMainWordDirection() {
         return random.nextBoolean()
-                ? Direction.RIGHT
-                : Direction.DOWN;
+                ? FindWordDirection.RIGHT
+                : FindWordDirection.DOWN;
     }
 
     private char[][] createGrid(int rows, int cols) {
@@ -277,23 +270,14 @@ public class FindWordService implements GameGenerator<FindWordRequest, FindWordR
             String word,
             int row,
             int col,
-            Direction direction) {
+            FindWordDirection direction) {
 
-        switch (direction) {
+        for (int i = 0; i < word.length(); i++) {
 
-            case RIGHT -> {
-                for (int i = 0; i < word.length(); i++) {
-                    grid[row][col + i] = word.charAt(i);
-                }
-            }
+            int currentRow = direction.nextRow(row, i);
+            int currentCol = direction.nextCol(col, i);
 
-            case DOWN -> {
-                for (int i = 0; i < word.length(); i++) {
-                    grid[row + i][col] = word.charAt(i);
-                }
-            }
-
-            default -> throw new IllegalStateException("Unexpected direction: " + direction.name());
+            grid[currentRow][currentCol] = word.charAt(i);
         }
     }
 

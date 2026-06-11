@@ -4,9 +4,9 @@ import java.util.List;
 
 import org.springframework.web.bind.annotation.*;
 
-import com.aleksander.wordgames.common.enums.Direction;
 import com.aleksander.wordgames.findword.dto.FindWordRequest;
 import com.aleksander.wordgames.findword.dto.FindWordResponse;
+import com.aleksander.wordgames.findword.enums.FindWordDirection;
 import com.aleksander.wordgames.findword.service.FindWordService;
 import com.aleksander.wordgames.word.dto.request.WordFilterRequest;
 
@@ -24,7 +24,7 @@ public class FindWordController {
             @RequestParam String mainWord,
             @RequestParam(defaultValue = "10") Integer maxCrossLength,
             @RequestParam(required = false) Integer mainWordAxisIndex,
-            @RequestParam(required = false) Direction mainWordDirection,
+            @RequestParam(required = false) FindWordDirection mainWordDirection,
 
             // filters
             @RequestParam(required = false) Integer minLength,

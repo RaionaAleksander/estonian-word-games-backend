@@ -6,7 +6,7 @@ import java.util.List;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-import com.aleksander.wordgames.common.dto.WordJson;
+import com.aleksander.wordgames.config.dto.WordJson;
 import com.aleksander.wordgames.model.entity.Word;
 import com.aleksander.wordgames.model.entity.WordDefinition;
 import com.aleksander.wordgames.word.repository.WordDefinitionRepository;

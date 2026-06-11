@@ -1,6 +1,6 @@
 package com.aleksander.wordgames.findword.dto;
 
-import com.aleksander.wordgames.common.enums.Direction;
+import com.aleksander.wordgames.findword.enums.FindWordDirection;
 import com.aleksander.wordgames.word.dto.request.WordFilterRequest;
 
 import lombok.*;
@@ -14,7 +14,7 @@ public class FindWordRequest {
 
     private Integer mainWordAxisIndex;
 
-    private Direction mainWordDirection;
+    private FindWordDirection mainWordDirection;
 
     private WordFilterRequest filter;
 }

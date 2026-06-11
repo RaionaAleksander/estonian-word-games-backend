@@ -3,7 +3,6 @@ package com.aleksander.wordgames.wordsearch.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import com.aleksander.wordgames.common.enums.Direction;
 import com.aleksander.wordgames.common.enums.GameType;
 import com.aleksander.wordgames.generator.GameGenerator;
 import com.aleksander.wordgames.word.dto.meta.FilterMetaDto;
@@ -17,6 +16,7 @@ import com.aleksander.wordgames.word.service.WordService;
 import com.aleksander.wordgames.wordsearch.dto.PlacementDto;
 import com.aleksander.wordgames.wordsearch.dto.WordSearchRequest;
 import com.aleksander.wordgames.wordsearch.dto.WordSearchResponse;
+import com.aleksander.wordgames.wordsearch.enums.WordSearchDirection;
 import com.aleksander.wordgames.wordsearch.exception.NoWordsFoundException;
 import com.aleksander.wordgames.wordsearch.exception.WordSearchGenerationException;
 import com.aleksander.wordgames.wordsearch.validation.WordSearchValidator;
@@ -138,30 +138,30 @@ public class WordSearchService implements GameGenerator<WordSearchRequest, WordS
         }
     }
 
-    private List<Direction> getValidDirections(String word, int rows, int cols) {
+    private List<WordSearchDirection> getValidDirections(String word, int rows, int cols) {
 
-        List<Direction> directions = new ArrayList<>();
+        List<WordSearchDirection> directions = new ArrayList<>();
 
         int len = word.length();
 
         // horizontal
         if (len <= cols) {
-            directions.add(Direction.RIGHT);
-            directions.add(Direction.LEFT);
+            directions.add(WordSearchDirection.RIGHT);
+            directions.add(WordSearchDirection.LEFT);
         }
 
         // vertical
         if (len <= rows) {
-            directions.add(Direction.DOWN);
-            directions.add(Direction.UP);
+            directions.add(WordSearchDirection.DOWN);
+            directions.add(WordSearchDirection.UP);
         }
 
         // diagonal
         if (len <= rows && len <= cols) {
-            directions.add(Direction.DOWN_RIGHT);
-            directions.add(Direction.DOWN_LEFT);
-            directions.add(Direction.UP_RIGHT);
-            directions.add(Direction.UP_LEFT);
+            directions.add(WordSearchDirection.DOWN_RIGHT);
+            directions.add(WordSearchDirection.DOWN_LEFT);
+            directions.add(WordSearchDirection.UP_RIGHT);
+            directions.add(WordSearchDirection.UP_LEFT);
         }
 
         return directions;
@@ -172,7 +172,7 @@ public class WordSearchService implements GameGenerator<WordSearchRequest, WordS
         int rows = grid.length;
         int cols = grid[0].length;
 
-        List<Direction> validDirections = getValidDirections(word, rows, cols);
+        List<WordSearchDirection> validDirections = getValidDirections(word, rows, cols);
 
         if (validDirections.isEmpty()) {
             return null;
@@ -180,7 +180,7 @@ public class WordSearchService implements GameGenerator<WordSearchRequest, WordS
 
         for (int attempt = 0; attempt < 100; attempt++) {
 
-            Direction dir = validDirections.get(random.nextInt(validDirections.size()));
+            WordSearchDirection dir = validDirections.get(random.nextInt(validDirections.size()));
 
             int row;
             int col;
@@ -246,7 +246,7 @@ public class WordSearchService implements GameGenerator<WordSearchRequest, WordS
         return null;
     }
 
-    private boolean canPlaceBounds(String word, int row, int col, Direction dir, int rows, int cols) {
+    private boolean canPlaceBounds(String word, int row, int col, WordSearchDirection dir, int rows, int cols) {
 
         int endRow = dir.nextRow(row, word.length() - 1);
         int endCol = dir.nextCol(col, word.length() - 1);
@@ -257,7 +257,7 @@ public class WordSearchService implements GameGenerator<WordSearchRequest, WordS
                 && endCol < cols;
     }
 
-    private boolean canPlaceWord(char[][] grid, String word, int row, int col, Direction dir) {
+    private boolean canPlaceWord(char[][] grid, String word, int row, int col, WordSearchDirection dir) {
 
         for (int i = 0; i < word.length(); i++) {
 
@@ -274,7 +274,7 @@ public class WordSearchService implements GameGenerator<WordSearchRequest, WordS
         return true;
     }
 
-    private void place(char[][] grid, String word, int row, int col, Direction dir) {
+    private void place(char[][] grid, String word, int row, int col, WordSearchDirection dir) {
 
         for (int i = 0; i < word.length(); i++) {
 

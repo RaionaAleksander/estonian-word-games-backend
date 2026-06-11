@@ -35,6 +35,7 @@ public class SavedGameValidator {
         switch (type) {
             case FIND_WORD -> validateFindWord(payload);
             case WORD_SEARCH -> validateWordSearch(payload);
+            default -> throw new IllegalStateException("Unsupported GameType (possible enum mismatch): " + type);
         }
     }
 
