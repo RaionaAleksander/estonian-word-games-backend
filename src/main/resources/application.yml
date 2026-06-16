@@ -41,6 +41,9 @@ management:
 server:
   port: 8080
 
+app:
+  version: @project.version@
+
 cors:
   allowed-origins:
     - http://localhost:3000

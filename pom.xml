@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.aleksander.crossword</groupId>
 	<artifactId>estonian-word-games-backend</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<name>estonian-word-games-backend</name>
 	<description/>
 	<url/>
@@ -181,6 +181,12 @@
 				</configuration>
 			</plugin>
 		</plugins>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
 	</build>
 
 </project>
