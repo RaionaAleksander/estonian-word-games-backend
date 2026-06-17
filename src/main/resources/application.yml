@@ -17,11 +17,15 @@ spring:
       hibernate:
         format_sql: true
 
+# ---------------- Swagger ----------------
+
 springdoc:
   api-docs:
     enabled: true
   swagger-ui:
     enabled: true
+
+# ---------------- Actuator ----------------
 
 management:
   endpoints:
@@ -38,11 +42,17 @@ management:
     health:
       show-details: always
 
+# ---------------- Server ----------------
+
 server:
   port: 8080
 
+# ---------------- Application ----------------
+
 app:
   version: @project.version@
+
+# ---------------- CORS ----------------
 
 cors:
   allowed-origins:
@@ -50,6 +60,8 @@ cors:
     - http://localhost:4200
     - http://localhost:5173
     - https://estonian-word-games.vercel.app
+
+# ---------------- Dictionary Loader ----------------
 
 word-loader:
   files:
