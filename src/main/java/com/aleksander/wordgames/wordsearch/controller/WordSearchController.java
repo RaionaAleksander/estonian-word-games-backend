@@ -32,8 +32,8 @@ public class WordSearchController {
             @RequestParam(required = false) String endsWith,
             @RequestParam(required = false) List<String> contains,
             @RequestParam(required = false) List<String> notContains,
-            @RequestParam(required = false) List<String> categories,
-            @RequestParam(required = false) List<String> excludedCategories,
+            @RequestParam(required = false) List<String> includeCategories,
+            @RequestParam(required = false) List<String> excludeCategories,
             @RequestParam(required = false) String pattern,
             @RequestParam(required = false) List<String> excludedWords) {
         WordFilterRequest filter = new WordFilterRequest(
@@ -43,8 +43,8 @@ public class WordSearchController {
                 endsWith,
                 contains,
                 notContains,
-                categories,
-                excludedCategories,
+                includeCategories,
+                excludeCategories,
                 pattern,
                 excludedWords);
 
