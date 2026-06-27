@@ -1,6 +1,7 @@
 package com.aleksander.wordgames.wordsearch.dto;
 
 import com.aleksander.wordgames.word.dto.request.WordFilterRequest;
+import com.aleksander.wordgames.word.dto.request.WordSortRequest;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,4 +18,6 @@ public class WordSearchRequest {
     private Boolean allowIncomplete;
 
     private WordFilterRequest filter;
+
+    private WordSortRequest sort;
 }

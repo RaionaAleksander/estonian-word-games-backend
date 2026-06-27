@@ -7,7 +7,7 @@ import java.time.Instant;
 import java.util.List;
 
 import com.aleksander.wordgames.common.enums.GameType;
-import com.aleksander.wordgames.word.dto.meta.FilterMetaDto;
+import com.aleksander.wordgames.word.dto.meta.WordRequestMetaDto;
 
 @Data
 @AllArgsConstructor
@@ -24,7 +24,7 @@ public class WordSearchResponse {
 
     private List<PlacementDto> placements;
 
-    private FilterMetaDto filters;
+    private WordRequestMetaDto meta;
 
     private Instant generatedAt;
 

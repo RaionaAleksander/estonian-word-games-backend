@@ -5,6 +5,9 @@ import java.util.List;
 import org.springframework.web.bind.annotation.*;
 
 import com.aleksander.wordgames.word.dto.request.WordFilterRequest;
+import com.aleksander.wordgames.word.dto.request.WordSortRequest;
+import com.aleksander.wordgames.word.enums.SortOrder;
+import com.aleksander.wordgames.word.enums.SortType;
 import com.aleksander.wordgames.wordsearch.dto.WordSearchRequest;
 import com.aleksander.wordgames.wordsearch.dto.WordSearchResponse;
 import com.aleksander.wordgames.wordsearch.service.WordSearchService;
@@ -35,8 +38,12 @@ public class WordSearchController {
             @RequestParam(required = false) List<String> includeCategories,
             @RequestParam(required = false) List<String> excludeCategories,
             @RequestParam(required = false) String pattern,
-            @RequestParam(required = false) List<String> excludedWords) {
-        WordFilterRequest filter = new WordFilterRequest(
+            @RequestParam(required = false) List<String> excludedWords,
+
+            // sort
+            @RequestParam(required = false) SortType sort,
+            @RequestParam(required = false) SortOrder order) {
+        WordFilterRequest filterRequest = new WordFilterRequest(
                 minLength,
                 maxLength,
                 startsWith,
@@ -48,12 +55,17 @@ public class WordSearchController {
                 pattern,
                 excludedWords);
 
+        WordSortRequest sortRequest = new WordSortRequest(
+                sort,
+                order);
+
         WordSearchRequest request = new WordSearchRequest(
                 rows,
                 cols,
                 wordsCount,
                 allowIncomplete,
-                filter);
+                filterRequest,
+                sortRequest);
 
         return wordSearchService.generate(request);
     }

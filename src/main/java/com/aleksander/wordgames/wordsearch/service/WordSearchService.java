@@ -6,6 +6,8 @@ import org.springframework.stereotype.Service;
 import com.aleksander.wordgames.common.enums.GameType;
 import com.aleksander.wordgames.generator.GameGenerator;
 import com.aleksander.wordgames.word.dto.meta.FilterMetaDto;
+import com.aleksander.wordgames.word.dto.meta.SortMetaDto;
+import com.aleksander.wordgames.word.dto.meta.WordRequestMetaDto;
 import com.aleksander.wordgames.word.dto.model.WordDto;
 import com.aleksander.wordgames.word.dto.request.WordFilterRequest;
 import com.aleksander.wordgames.word.dto.request.WordRandomListRequest;
@@ -23,6 +25,7 @@ import com.aleksander.wordgames.wordsearch.validation.WordSearchValidator;
 
 import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Random;
 
@@ -52,9 +55,13 @@ public class WordSearchService implements GameGenerator<WordSearchRequest, WordS
             filter.setMaxLength(Math.max(rows, cols));
         }
 
+        WordSortRequest generationSort = new WordSortRequest(
+                SortType.LENGTH,
+                SortOrder.DESC);
+
         WordRandomListRequest listRequest = new WordRandomListRequest(
                 filter,
-                new WordSortRequest(SortType.LENGTH, SortOrder.DESC),
+                generationSort,
                 request.getWordsCount());
 
         List<String> words = wordService.findRandomWords(listRequest)
@@ -106,7 +113,24 @@ public class WordSearchService implements GameGenerator<WordSearchRequest, WordS
 
                 fillRandom(grid);
 
-                FilterMetaDto meta = wordService.buildFilterMeta(request.getFilter());
+                WordSortRequest userSort = request.getSort();
+
+                if (userSort == null || userSort.getSort() == null) {
+                    userSort = generationSort;
+                }
+
+                if (!isGenerationSort(userSort)) {
+                    placements = sortPlacements(placements, userSort);
+                    words = extractWords(placements);
+                }
+
+                FilterMetaDto filterMetaDto = wordService.buildFilterMeta(request.getFilter());
+
+                SortMetaDto sortMetaDto = wordService.buildSortMeta(userSort);
+
+                WordRequestMetaDto requestMeta = new WordRequestMetaDto(
+                        filterMetaDto,
+                        sortMetaDto);
 
                 return new WordSearchResponse(
                         GameType.WORD_SEARCH,
@@ -115,7 +139,7 @@ public class WordSearchService implements GameGenerator<WordSearchRequest, WordS
                         grid,
                         words,
                         placements,
-                        meta,
+                        requestMeta,
                         Instant.now(),
                         warning);
             }
@@ -125,6 +149,39 @@ public class WordSearchService implements GameGenerator<WordSearchRequest, WordS
     }
 
     // ---------------- helpers ----------------
+
+    private List<PlacementDto> sortPlacements(
+            List<PlacementDto> placements,
+            WordSortRequest request) {
+
+        if (request == null || request.getSort() == null) {
+            return placements;
+        }
+
+        Comparator<PlacementDto> comparator = switch (request.getSort()) {
+            case LENGTH -> Comparator.comparingInt(p -> p.getWord().length());
+            case ALPHABET -> Comparator.comparing(PlacementDto::getWord);
+        };
+
+        if (request.getOrder() == SortOrder.DESC) {
+            comparator = comparator.reversed();
+        }
+
+        return placements.stream()
+                .sorted(comparator)
+                .toList();
+    }
+
+    private List<String> extractWords(List<PlacementDto> placements) {
+        return placements.stream()
+                .map(PlacementDto::getWord)
+                .toList();
+    }
+
+    private boolean isGenerationSort(WordSortRequest request) {
+        return request.getSort() == SortType.LENGTH
+                && request.getOrder() == SortOrder.DESC;
+    }
 
     private void fillRandom(char[][] grid) {
 
