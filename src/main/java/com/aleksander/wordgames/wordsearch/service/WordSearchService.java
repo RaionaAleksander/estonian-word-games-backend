@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import com.aleksander.wordgames.common.enums.GameType;
+import com.aleksander.wordgames.common.enums.LetterCase;
 import com.aleksander.wordgames.generator.GameGenerator;
 import com.aleksander.wordgames.word.dto.meta.FilterMetaDto;
 import com.aleksander.wordgames.word.dto.meta.SortMetaDto;
@@ -113,6 +114,8 @@ public class WordSearchService implements GameGenerator<WordSearchRequest, WordS
 
                 fillRandom(grid);
 
+                applyLetterCase(grid, request.getLetterCase());
+
                 WordSortRequest userSort = request.getSort();
 
                 if (userSort == null || userSort.getSort() == null) {
@@ -136,6 +139,7 @@ public class WordSearchService implements GameGenerator<WordSearchRequest, WordS
                         GameType.WORD_SEARCH,
                         rows,
                         cols,
+                        request.getLetterCase(),
                         grid,
                         words,
                         placements,
@@ -191,6 +195,20 @@ public class WordSearchService implements GameGenerator<WordSearchRequest, WordS
                 if (grid[i][j] == '\u0000') {
                     grid[i][j] = ESTONIAN_LETTERS[random.nextInt(ESTONIAN_LETTERS.length)];
                 }
+            }
+        }
+    }
+
+    private void applyLetterCase(char[][] grid, LetterCase letterCase) {
+        if (letterCase != LetterCase.UPPER) {
+            return;
+        }
+
+        for (int row = 0; row < grid.length; row++) {
+
+            for (int col = 0; col < grid[row].length; col++) {
+
+                grid[row][col] = Character.toUpperCase(grid[row][col]);
             }
         }
     }

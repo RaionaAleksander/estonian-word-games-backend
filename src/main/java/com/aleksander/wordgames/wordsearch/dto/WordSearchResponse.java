@@ -7,6 +7,7 @@ import java.time.Instant;
 import java.util.List;
 
 import com.aleksander.wordgames.common.enums.GameType;
+import com.aleksander.wordgames.common.enums.LetterCase;
 import com.aleksander.wordgames.word.dto.meta.WordRequestMetaDto;
 
 @Data
@@ -17,6 +18,8 @@ public class WordSearchResponse {
     private int rows;
 
     private int cols;
+
+    private LetterCase letterCase;
 
     private char[][] grid;
 

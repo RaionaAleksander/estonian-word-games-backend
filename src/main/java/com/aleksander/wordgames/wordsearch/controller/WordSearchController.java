@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.web.bind.annotation.*;
 
+import com.aleksander.wordgames.common.enums.LetterCase;
 import com.aleksander.wordgames.word.dto.request.WordFilterRequest;
 import com.aleksander.wordgames.word.dto.request.WordSortRequest;
 import com.aleksander.wordgames.word.enums.SortOrder;
@@ -27,6 +28,7 @@ public class WordSearchController {
             @RequestParam(defaultValue = "10") int cols,
             @RequestParam(defaultValue = "5") int wordsCount,
             @RequestParam(required = false) Boolean allowIncomplete,
+            @RequestParam(defaultValue = "LOWER") LetterCase letterCase,
 
             // filters
             @RequestParam(required = false) Integer minLength,
@@ -64,6 +66,7 @@ public class WordSearchController {
                 cols,
                 wordsCount,
                 allowIncomplete,
+                letterCase,
                 filterRequest,
                 sortRequest);
 
