@@ -54,7 +54,11 @@ public class SavedGameValidator {
         require(payload, "grid");
         require(payload, "words");
         require(payload, "placements");
-        require(payload, "filters");
+        require(payload, "meta");
+
+        JsonNode meta = payload.get("meta");
+        require(meta, "filters");
+        require(meta, "sort");
     }
 
     private static GameType parseGameType(JsonNode payload) {
