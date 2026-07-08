@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 import com.aleksander.wordgames.word.dto.request.WordSortRequest;
 import com.aleksander.wordgames.word.enums.SortOrder;
 import com.aleksander.wordgames.wordsearch.dto.PlacementDto;
+import com.aleksander.wordgames.wordsearch.enums.WordSearchDirection;
 
 @Component
 public class PlacementUtils {
@@ -36,6 +37,13 @@ public class PlacementUtils {
     public List<String> extractWords(List<PlacementDto> placements) {
         return placements.stream()
                 .map(PlacementDto::getWord)
+                .toList();
+    }
+
+    public List<WordSearchDirection> extractDirections(List<PlacementDto> placements) {
+        return placements.stream()
+                .map(PlacementDto::getDirection)
+                .distinct()
                 .toList();
     }
 }

@@ -22,6 +22,7 @@ import com.aleksander.wordgames.wordsearch.engine.placer.WordGridPlacer;
 import com.aleksander.wordgames.wordsearch.engine.placer.WordPlacementOptions;
 import com.aleksander.wordgames.wordsearch.engine.postprocess.GridPostProcessor;
 import com.aleksander.wordgames.wordsearch.engine.utils.PlacementUtils;
+import com.aleksander.wordgames.wordsearch.enums.WordSearchDirection;
 import com.aleksander.wordgames.wordsearch.exception.NoWordsFoundException;
 import com.aleksander.wordgames.wordsearch.exception.WordSearchGenerationException;
 import com.aleksander.wordgames.wordsearch.validation.WordSearchValidator;
@@ -133,11 +134,15 @@ public class WordSearchService implements GameGenerator<WordSearchRequest, WordS
                         filterMetaDto,
                         sortMetaDto);
 
+                List<WordSearchDirection> usedDirections = placementUtils.extractDirections(placements);
+
                 return new WordSearchResponse(
                         GameType.WORD_SEARCH,
                         rows,
                         cols,
                         request.getLetterCase(),
+                        placementOptions.allowIntersections(),
+                        usedDirections,
                         grid,
                         words,
                         placements,

@@ -9,6 +9,7 @@ import java.util.List;
 import com.aleksander.wordgames.common.enums.GameType;
 import com.aleksander.wordgames.common.enums.LetterCase;
 import com.aleksander.wordgames.word.dto.meta.WordRequestMetaDto;
+import com.aleksander.wordgames.wordsearch.enums.WordSearchDirection;
 
 @Data
 @AllArgsConstructor
@@ -20,6 +21,10 @@ public class WordSearchResponse {
     private int cols;
 
     private LetterCase letterCase;
+
+    private boolean allowIntersections;
+
+    private List<WordSearchDirection> usedDirections;
 
     private char[][] grid;
 
