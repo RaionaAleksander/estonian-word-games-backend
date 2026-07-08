@@ -14,18 +14,18 @@ public class WordGridPlacer {
 
     private final Random random = new Random();
 
-    public PlacementDto tryPlaceWord(char[][] grid, String word) {
+    public PlacementDto tryPlaceWord(char[][] grid, String word, WordPlacementOptions options) {
 
         int rows = grid.length;
         int cols = grid[0].length;
 
-        List<WordSearchDirection> validDirections = getValidDirections(word, rows, cols);
+        List<WordSearchDirection> validDirections = getValidDirections(word, rows, cols, options.directions());
 
         if (validDirections.isEmpty()) {
             return null;
         }
 
-        for (int attempt = 0; attempt < 100; attempt++) {
+        for (int attempt = 0; attempt < options.maxAttempts(); attempt++) {
 
             WordSearchDirection dir = validDirections.get(random.nextInt(validDirections.size()));
 
@@ -81,7 +81,7 @@ public class WordGridPlacer {
                 continue;
             }
 
-            if (!canPlaceWord(grid, word, row, col, dir)) {
+            if (!canPlaceWord(grid, word, row, col, dir, options.allowIntersections())) {
                 continue;
             }
 
@@ -93,7 +93,8 @@ public class WordGridPlacer {
         return null;
     }
 
-    private List<WordSearchDirection> getValidDirections(String word, int rows, int cols) {
+    private List<WordSearchDirection> getValidDirections(String word, int rows, int cols,
+            List<WordSearchDirection> allowedDirections) {
 
         List<WordSearchDirection> directions = new ArrayList<>();
 
@@ -119,7 +120,13 @@ public class WordGridPlacer {
             directions.add(WordSearchDirection.UP_LEFT);
         }
 
-        return directions;
+        if (allowedDirections == null || allowedDirections.isEmpty()) {
+            return directions;
+        }
+
+        return directions.stream()
+                .filter(allowedDirections::contains)
+                .toList();
     }
 
     private boolean canPlaceBounds(String word, int row, int col, WordSearchDirection dir, int rows, int cols) {
@@ -133,7 +140,8 @@ public class WordGridPlacer {
                 && endCol < cols;
     }
 
-    private boolean canPlaceWord(char[][] grid, String word, int row, int col, WordSearchDirection dir) {
+    private boolean canPlaceWord(char[][] grid, String word, int row, int col, WordSearchDirection dir,
+            boolean allowIntersections) {
 
         for (int i = 0; i < word.length(); i++) {
 
@@ -142,7 +150,15 @@ public class WordGridPlacer {
 
             char existing = grid[r][c];
 
-            if (existing != '\u0000' && existing != word.charAt(i)) {
+            if (existing == '\u0000') {
+                continue;
+            }
+
+            if (!allowIntersections) {
+                return false;
+            }
+
+            if (existing != word.charAt(i)) {
                 return false;
             }
         }

@@ -19,6 +19,7 @@ import com.aleksander.wordgames.wordsearch.dto.PlacementDto;
 import com.aleksander.wordgames.wordsearch.dto.WordSearchRequest;
 import com.aleksander.wordgames.wordsearch.dto.WordSearchResponse;
 import com.aleksander.wordgames.wordsearch.engine.placer.WordGridPlacer;
+import com.aleksander.wordgames.wordsearch.engine.placer.WordPlacementOptions;
 import com.aleksander.wordgames.wordsearch.engine.postprocess.GridPostProcessor;
 import com.aleksander.wordgames.wordsearch.engine.utils.PlacementUtils;
 import com.aleksander.wordgames.wordsearch.exception.NoWordsFoundException;
@@ -44,6 +45,8 @@ public class WordSearchService implements GameGenerator<WordSearchRequest, WordS
 
         int rows = request.getRows();
         int cols = request.getCols();
+
+        WordPlacementOptions placementOptions = request.getPlacement();
 
         WordFilterRequest filter = request.getFilter();
 
@@ -86,7 +89,7 @@ public class WordSearchService implements GameGenerator<WordSearchRequest, WordS
             }
         }
 
-        for (int attempt = 0; attempt < 100; attempt++) {
+        for (int attempt = 0; attempt < placementOptions.maxAttempts(); attempt++) {
 
             char[][] grid = new char[rows][cols];
             List<PlacementDto> placements = new ArrayList<>();
@@ -95,7 +98,7 @@ public class WordSearchService implements GameGenerator<WordSearchRequest, WordS
 
             for (String word : words) {
 
-                PlacementDto placement = wordGridPlacer.tryPlaceWord(grid, word);
+                PlacementDto placement = wordGridPlacer.tryPlaceWord(grid, word, placementOptions);
 
                 if (placement == null) {
                     success = false;

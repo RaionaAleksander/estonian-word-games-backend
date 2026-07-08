@@ -11,6 +11,8 @@ import com.aleksander.wordgames.word.enums.SortOrder;
 import com.aleksander.wordgames.word.enums.SortType;
 import com.aleksander.wordgames.wordsearch.dto.WordSearchRequest;
 import com.aleksander.wordgames.wordsearch.dto.WordSearchResponse;
+import com.aleksander.wordgames.wordsearch.engine.placer.WordPlacementOptions;
+import com.aleksander.wordgames.wordsearch.enums.WordSearchDirection;
 import com.aleksander.wordgames.wordsearch.service.WordSearchService;
 
 import lombok.RequiredArgsConstructor;
@@ -29,6 +31,8 @@ public class WordSearchController {
             @RequestParam(defaultValue = "5") int wordsCount,
             @RequestParam(required = false) Boolean allowIncomplete,
             @RequestParam(defaultValue = "LOWER") LetterCase letterCase,
+            @RequestParam(defaultValue = "true") Boolean allowIntersections,
+            @RequestParam(required = false) List<WordSearchDirection> directions,
 
             // filters
             @RequestParam(required = false) Integer minLength,
@@ -61,6 +65,11 @@ public class WordSearchController {
                 sort,
                 order);
 
+        WordPlacementOptions placementOptions = new WordPlacementOptions(
+                allowIntersections,
+                directions,
+                100);
+
         WordSearchRequest request = new WordSearchRequest(
                 rows,
                 cols,
@@ -68,7 +77,8 @@ public class WordSearchController {
                 allowIncomplete,
                 letterCase,
                 filterRequest,
-                sortRequest);
+                sortRequest,
+                placementOptions);
 
         return wordSearchService.generate(request);
     }
