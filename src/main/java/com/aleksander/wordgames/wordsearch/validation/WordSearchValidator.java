@@ -1,7 +1,7 @@
 package com.aleksander.wordgames.wordsearch.validation;
 
 import com.aleksander.wordgames.word.dto.request.WordFilterRequest;
-import com.aleksander.wordgames.wordsearch.dto.WordSearchRequest;
+import com.aleksander.wordgames.wordsearch.dto.request.WordSearchRequest;
 import com.aleksander.wordgames.wordsearch.exception.WordSearchValidationException;
 
 public class WordSearchValidator {

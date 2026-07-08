@@ -46,4 +46,26 @@ public class PlacementUtils {
                 .distinct()
                 .toList();
     }
+
+    public List<String> sortWords(
+            List<String> words,
+            WordSortRequest request) {
+
+        if (request == null || request.getSort() == null) {
+            return words;
+        }
+
+        Comparator<String> comparator = switch (request.getSort()) {
+            case LENGTH -> Comparator.comparingInt(String::length);
+            case ALPHABET -> Comparator.naturalOrder();
+        };
+
+        if (request.getOrder() == SortOrder.DESC) {
+            comparator = comparator.reversed();
+        }
+
+        return words.stream()
+                .sorted(comparator)
+                .toList();
+    }
 }
