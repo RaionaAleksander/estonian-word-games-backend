@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import com.aleksander.wordgames.config.loader.WordImportService;
 import com.aleksander.wordgames.model.entity.Word;
 import com.aleksander.wordgames.model.entity.WordDefinition;
 import com.aleksander.wordgames.word.dto.meta.FilterMetaDto;
@@ -27,6 +28,8 @@ import com.aleksander.wordgames.word.repository.WordDefinitionRepository;
 import com.aleksander.wordgames.word.repository.WordRepository;
 import com.aleksander.wordgames.word.repository.specification.WordSpecification;
 
+import jakarta.transaction.Transactional;
+
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -41,7 +44,8 @@ import java.util.stream.Collectors;
 public class WordService {
 
     private final WordRepository wordRepository;
-    private final WordDefinitionRepository definitionRepository;
+    private final WordDefinitionRepository wordDefinitionRepository;
+    private final WordImportService wordImportService;
 
     public WordResponse getRandomWordsResponse(WordRandomListRequest request) {
 
@@ -197,6 +201,17 @@ public class WordService {
                 now);
     }
 
+    @Transactional
+    public void deleteAll() {
+        wordRepository.truncate();
+    }
+
+    @Transactional
+    public void reload() throws Exception {
+        wordRepository.truncate();
+        wordImportService.loadAll();
+    }
+
     // ---------------- helpers ----------------
 
     private WordDto toDto(Word w) {
@@ -234,7 +249,7 @@ public class WordService {
 
         Word entity = getWordOrThrow(lemma);
 
-        List<String> definitions = definitionRepository
+        List<String> definitions = wordDefinitionRepository
                 .findByWordId(entity.getId())
                 .stream()
                 .map(WordDefinition::getDefinition)

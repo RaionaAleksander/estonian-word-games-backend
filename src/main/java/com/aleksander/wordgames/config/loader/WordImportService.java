@@ -1,49 +1,49 @@
-package com.aleksander.wordgames.config;
+package com.aleksander.wordgames.config.loader;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
+import com.aleksander.wordgames.config.WordLoaderProperties;
 import com.aleksander.wordgames.config.dto.WordJson;
 import com.aleksander.wordgames.model.entity.Word;
 import com.aleksander.wordgames.model.entity.WordDefinition;
 import com.aleksander.wordgames.word.repository.WordDefinitionRepository;
 import com.aleksander.wordgames.word.repository.WordRepository;
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.core.type.TypeReference;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
-@Component
+@Service
 @RequiredArgsConstructor
-public class DataLoader implements CommandLineRunner {
+public class WordImportService {
 
     private final WordRepository wordRepository;
     private final WordDefinitionRepository definitionRepository;
     private final WordLoaderProperties properties;
+    private final ObjectMapper objectMapper;
 
-    private final ObjectMapper objectMapper = new ObjectMapper();
-
-    @Override
-    public void run(String... args) throws Exception {
-
-        if (wordRepository.count() > 0) {
-            return;
-        }
+    @Transactional
+    public void loadAll() throws IOException {
 
         for (WordLoaderProperties.FileConfig config : properties.getFiles()) {
             loadFromFile(config.getFile(), config.getCategory());
         }
-
-        System.out.println("Words + definitions loaded!");
     }
 
-    private void loadFromFile(String fileName, String category) throws Exception {
+    private void loadFromFile(String fileName, String category) throws IOException {
 
         InputStream is = getClass()
                 .getResourceAsStream("/data/" + fileName);
+
+        if (is == null) {
+            throw new IllegalArgumentException(
+                    "Cannot find file: " + fileName);
+        }
 
         List<WordJson> words = objectMapper.readValue(
                 is,
@@ -52,19 +52,21 @@ public class DataLoader implements CommandLineRunner {
 
         for (WordJson json : words) {
 
+            String lemma = json.getWord().trim().toLowerCase();
+
             Word word = Word.builder()
-                    .lemma(json.getWord().toLowerCase())
-                    .length(json.getWord().length())
+                    .lemma(lemma)
+                    .length(lemma.length())
                     .category(category)
                     .build();
 
             wordRepository.save(word);
 
-            for (String def : json.getDefinitions()) {
+            for (String definitionText : json.getDefinitions()) {
 
                 WordDefinition definition = new WordDefinition();
                 definition.setWord(word);
-                definition.setDefinition(def);
+                definition.setDefinition(definitionText);
 
                 definitionRepository.save(definition);
             }

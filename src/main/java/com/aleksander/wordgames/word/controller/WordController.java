@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import com.aleksander.wordgames.word.dto.request.WordFilterRequest;
@@ -140,5 +141,17 @@ public class WordController {
 			@RequestParam(required = false) Integer visibleLetters) {
 
 		return wordService.getPatternResponse(word, visibleLetters);
+	}
+
+	@DeleteMapping
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	public void deleteAll() {
+		wordService.deleteAll();
+	}
+
+	@PostMapping("/reload")
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	public void reload() throws Exception {
+		wordService.reload();
 	}
 }

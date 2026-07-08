@@ -104,6 +104,11 @@ public class SavedGameService {
         repository.delete(game);
     }
 
+    @Transactional
+    public void deleteAll() {
+        repository.truncate();
+    }
+
     // ---------------- helpers ----------------
 
     private int resolvePage(Integer page) {
