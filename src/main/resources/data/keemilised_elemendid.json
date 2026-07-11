@@ -1,0 +1,474 @@
+[
+  {
+    "word": "vesinik",
+    "definitions": ["Keemiline element, mille sümbol on H", "Maailmaruumi kõige levinum ja kergem gaas"]
+  },
+  {
+    "word": "heelium",
+    "definitions": ["Keemiline element, mille sümbol on He", "Kerge gaas, millega täidetakse õhupalle ja mis teeb hääle piiksuvaks"]
+  },
+  {
+    "word": "liitium",
+    "definitions": ["Keemiline element, mille sümbol on Li", "Kõige kergem metall, mida kasutatakse palju akude valmistamisel"]
+  },
+  {
+    "word": "berüllium",
+    "definitions": ["Keemiline element, mille sümbol on Be", "Kergmetall, mida kasutatakse kosmosetehnoloogias ja röntgenitorudes"]
+  },
+  {
+    "word": "boor",
+    "definitions": ["Keemiline element, mille sümbol on B", "Poolmetall, mida kasutatakse klaasi tugevdamiseks ja silmatilkades"]
+  },
+  {
+    "word": "süsinik",
+    "definitions": ["Keemiline element, mille sümbol on C", "Elusa looduse aluselement, millest koosnevad nii teemant kui ka sögi"]
+  },
+  {
+    "word": "lämmastik",
+    "definitions": ["Keemiline element, mille sümbol on N", "Gaas, mis moodustab ligi 78 protsenti Maa atmosfäärist"]
+  },
+  {
+    "word": "hapnik",
+    "definitions": ["Keemiline element, mille sümbol on O", "Gaas, mida inimesed ja loomad vajavad hingamiseks"]
+  },
+  {
+    "word": "fluor",
+    "definitions": ["Keemiline element, mille sümbol on F", "Väga aktiivne gaas, mille ühendeid lisatakse hambapastasse"]
+  },
+  {
+    "word": "neoon",
+    "definitions": ["Keemiline element, mille sümbol on Ne", "Väärisgaas, mis helendab elektrivoolu käes eredalt punakalt ja mida kasutatakse reklaamides"]
+  },
+  {
+    "word": "naatrium",
+    "definitions": ["Keemiline element, mille sümbol on Na", "Pehme metall, mis koos klooriga moodustab tavalise söögisoola"]
+  },
+  {
+    "word": "magneesium",
+    "definitions": ["Keemiline element, mille sümbol on Mg", "Kerge metall, mis põleb heleda leegiga ja on inimese lihastele vajalik mineraal"]
+  },
+  {
+    "word": "alumiinium",
+    "definitions": ["Keemiline element, mille sümbol on Al", "Väga levinud kergmetall, millest tehakse joogipurke ja fooliumi"]
+  },
+  {
+    "word": "räni",
+    "definitions": ["Keemiline element, mille sümbol on Si", "Poolmetall, mida leidub liivas ja millest tehakse arvutikiipisid"]
+  },
+  {
+    "word": "fosfor",
+    "definitions": ["Keemiline element, mille sümbol on P", "Mittemetall, mis pimedas helendab ja mida kasutatakse tuletikkude tootmisel"]
+  },
+  {
+    "word": "väävel",
+    "definitions": ["Keemiline element, mille sümbol on S", "Kollane mittemetall, mille põlemisel tekkiv gaas on väga terava lõhnaga"]
+  },
+  {
+    "word": "kloor",
+    "definitions": ["Keemiline element, mille sümbol on Cl", "Kollakasroheline mürgine gaas, mida kasutatakse basseinivee puhastamiseks"]
+  },
+  {
+    "word": "argoon",
+    "definitions": ["Keemiline element, mille sümbol on Ar", "Lõhnavaba ja värvitu väärisgaas, mida kasutatakse elektripirnide täitmiseks"]
+  },
+  {
+    "word": "kaalium",
+    "definitions": ["Keemiline element, mille sümbol on K", "Metall, mida taimed vajavad väetisena ja inimesed südame tööks"]
+  },
+  {
+    "word": "kaltsium",
+    "definitions": ["Keemiline element, mille sümbol on Ca", "Metall, mille ühendid teevad meie luud ja hambad tugevaks"]
+  },
+  {
+    "word": "skandium",
+    "definitions": ["Keemiline element, mille sümbol on Sc", "Haruldane metall, mida lisatakse alumiiniumisulamitele spordivahendite tugevdamiseks"]
+  },
+  {
+    "word": "titaan",
+    "definitions": ["Keemiline element, mille sümbol on Ti", "Väga tugev ja kerge korrosioonikindel metall, mida kasutatakse meditsiinilistes implantaatides"]
+  },
+  {
+    "word": "vanaadium",
+    "definitions": ["Keemiline element, mille sümbol on V", "Kõva metall, mida lisatakse terasele, et muuta see vastupidavamaks"]
+  },
+  {
+    "word": "kroom",
+    "definitions": ["Keemiline element, mille sümbol on Cr", "Läikiv metall, mida kasutatakse metallpindade katmiseks, et need ei roostetaks"]
+  },
+  {
+    "word": "mangaan",
+    "definitions": ["Keemiline element, mille sümbol on Mn", "Hallikasvalge metall, mis teeb terase kulumiskindlaks"]
+  },
+  {
+    "word": "raud",
+    "definitions": ["Keemiline element, mille sümbol on Fe", "Üks maailma kõige tähtsamaid metalle, millest ehitatakse masinaid ja sildu"]
+  },
+  {
+    "word": "koobalt",
+    "definitions": ["Keemiline element, mille sümbol on Co", "Kõva metall, mida kasutatakse magnetites ja mis annab klaasile ilusa sinise värvi"]
+  },
+  {
+    "word": "nikkel",
+    "definitions": ["Keemiline element, mille sümbol on Ni", "Hõbedane metall, mida kasutatakse palju müntide valmistamisel"]
+  },
+  {
+    "word": "vask",
+    "definitions": ["Keemiline element, mille sümbol on Cu", "Punaka värvusega metall, mis juhib suurepäraselt elektrit ja millest tehakse juhtmeid"]
+  },
+  {
+    "word": "tsink",
+    "definitions": ["Keemiline element, mille sümbol on Zn", "Sinakasvalge metall, millega kaetakse rauda (tsingitakse), et kaitsta seda rooste eest"]
+  },
+  {
+    "word": "gallium",
+    "definitions": ["Keemiline element, mille sümbol on Ga", "Metall, mis sulab sõna otseses mõttes käesoojuses"]
+  },
+  {
+    "word": "germaanium",
+    "definitions": ["Keemiline element, mille sümbol on Ge", "Hallikasvalge poolmetall, mida kasutatakse pooljuht elektroonikas ja läätsetööstuses"]
+  },
+  {
+    "word": "arseen",
+    "definitions": ["Keemiline element, mille sümbol on As", "Poolmetall, mille ühendid on kurikuulsad kui väga tugevad ja ohtlikud mürgid"]
+  },
+  {
+    "word": "seleen",
+    "definitions": ["Keemiline element, mille sümbol on Se", "Mittemetall, mida inimkeha vajab immuunsüsteemi tööks ja mida leidub šampoonides"]
+  },
+  {
+    "word": "broom",
+    "definitions": ["Keemiline element, mille sümbol on Br", "Ainus mittemetalliline element perioodilisustabelis, mis on toatemperatuuril vedel"]
+  },
+  {
+    "word": "krüptoon",
+    "definitions": ["Keemiline element, mille sümbol on Kr", "Värvitu väärisgaas, mida kasutatakse luminofoorlampides ja välklampides"]
+  },
+  {
+    "word": "rubiidium",
+    "definitions": ["Keemiline element, mille sümbol on Rb", "Väga pehme ja keemiliselt aktiivne leelismetall, mis süttib õhu käes iseeneslikult"]
+  },
+  {
+    "word": "strontsium",
+    "definitions": ["Keemiline element, mille sümbol on Sr", "Hõbedane metall, mille ühendid annavad ilutulestikule ilusa helendava punase värvi"]
+  },
+  {
+    "word": "üttrium",
+    "definitions": ["Keemiline element, mille sümbol on Y", "Hõbedane metall, mida kasutatakse laserite ja LED-lampide valmistamisel"]
+  },
+  {
+    "word": "tsirkoonium",
+    "definitions": ["Keemiline element, mille sümbol on Zr", "Metall, mille ühendeid kasutatakse tehisteemantide ja kuumakindla keraamika tootmiseks"]
+  },
+  {
+    "word": "nioobium",
+    "definitions": ["Keemiline element, mille sümbol on Nb", "Helehall metall, mida kasutatakse ülijuhtivate magnetite ja reaktiivmootorite detailide valmistamisel"]
+  },
+  {
+    "word": "molübdeen",
+    "definitions": ["Keemiline element, mille sümbol on Mo", "Väga kõrge sulamistemperatuuriga metall, mida lisatakse tööriistaterasele"]
+  },
+  {
+    "word": "tehneetsium",
+    "definitions": ["Keemiline element, mille sümbol on Tc", "Esimene tehislikult valmistatud element, mida kasutatakse meditsiinilises kuvamises"]
+  },
+  {
+    "word": "ruteenium",
+    "definitions": ["Keemiline element, mille sümbol on Ru", "Haruldane kõva plaatinarühma metall, mida kasutatakse elektrikontaktide katmiseks"]
+  },
+  {
+    "word": "roodium",
+    "definitions": ["Keemiline element, mille sümbol on Rh", "Väga kallis ja läikiv metall, mida kasutatakse autode katalüsaatorites ja ehete valgendamiseks"]
+  },
+  {
+    "word": "pallaadium",
+    "definitions": ["Keemiline element, mille sümbol on Pd", "Hõbevalge metall, mis suudab endasse imeda tohutul hulgal vesinikgaasi"]
+  },
+  {
+    "word": "hõbe",
+    "definitions": ["Keemiline element, mille sümbol on Ag", "Väärismetall, mis juhib kõigist metallidest kõige paremini elektrit ja soojust"]
+  },
+  {
+    "word": "kaadmium",
+    "definitions": ["Keemiline element, mille sümbol on Cd", "Pehme ja mürgine sinakasvalge metall, mida kasutati vanasti laialdaselt akudes"]
+  },
+  {
+    "word": "indium",
+    "definitions": ["Keemiline element, mille sümbol on In", "Väga pehme metall, mille ühendeid kasutatakse nutitelefonide puutetundlikes ekraanides"]
+  },
+  {
+    "word": "tina",
+    "definitions": ["Keemiline element, mille sümbol on Sn", "Madala sulamistemperatuuriga metall, mida kasutatakse jootetöödel ja pronksi sulatamisel"]
+  },
+  {
+    "word": "antimon",
+    "definitions": ["Keemiline element, mille sümbol on Sb", "Läikiv poolmetall, mida lisatakse teistele metallidele nende kõvaduse suurendamiseks"]
+  },
+  {
+    "word": "telluur",
+    "definitions": ["Keemiline element, mille sümbol on Te", "Haruldane poolmetall, mida kasutatakse päikesepaneelide ja optiliste plaatide tootmises"]
+  },
+  {
+    "word": "jood",
+    "definitions": ["Keemiline element, mille sümbol on I", "Tumedad kristallid, mille piirituslahust kasutatakse meditsiinis haavade desinfitseerimiseks"]
+  },
+  {
+    "word": "ksenoon",
+    "definitions": ["Keemiline element, mille sümbol on Xe", "Raske väärisgaas, mida kasutatakse autode esitulede pirnides ja kosmoselaevade ioonmootorites"]
+  },
+  {
+    "word": "tseesium",
+    "definitions": ["Keemiline element, mille sümbol on Cs", "Kuldse läikega üliaktiivne metall, mille aatomi võnkumise alusel töötab maailma kõige täpsem aatomkell"]
+  },
+  {
+    "word": "baarium",
+    "definitions": ["Keemiline element, mille sümbol on Ba", "Pehme leelismuldmetall, mille ühendeid kasutatakse meditsiinis röntgenikontrastina magu uurides"]
+  },
+  {
+    "word": "lantaan",
+    "definitions": ["Keemiline element, mille sümbol on La", "Hõbevalge haruldane muldmetall, mis on lantanoidide rühma esimeseks elemendiks"]
+  },
+  {
+    "word": "tseerium",
+    "definitions": ["Keemiline element, mille sümbol on Ce", "Kõige levinum haruldane muldmetall, mille puru tekitab hõõrdumisel sädemeid ja mida kasutatakse tulemasina kivides"]
+  },
+  {
+    "word": "praseodüüm",
+    "definitions": ["Keemiline element, mille sümbol on Pr", "Pehme ja plastne metall, mille ühendeid kasutatakse klaasi värvimiseks puhtaks kollaseks"]
+  },
+  {
+    "word": "neodüüm",
+    "definitions": ["Keemiline element, mille sümbol on Nd", "Metall, millest valmistatakse maailma kõige tugevamaid ja võimsamaid püsimagneteid"]
+  },
+  {
+    "word": "promeetium",
+    "definitions": ["Keemiline element, mille sümbol on Pm", "Haruldane radioaktiivne metall, mida kasutatakse tuumapatareides ja helendavates värvides"]
+  },
+  {
+    "word": "samaarium",
+    "definitions": ["Keemiline element, mille sümbol on Sm", "Metall, mida kasutatakse koos neodüümiga eriti kuumakindlate magnetite valmistamisel"]
+  },
+  {
+    "word": "euroopium",
+    "definitions": ["Keemiline element, mille sümbol on Eu", "Kõige aktiivsem haruldane muldmetall, mille ühendeid kasutatakse europangatähtede turvaelementides"]
+  },
+  {
+    "word": "gadoliinium",
+    "definitions": ["Keemiline element, mille sümbol on Gd", "Hõbevalge metall, mida kasutatakse magnetresonantstomograafias (MRT) kontrastainena"]
+  },
+  {
+    "word": "terbium",
+    "definitions": ["Keemiline element, mille sümbol on Tb", "Pehme metall, mida kasutatakse rohelist värvi andva luminofoorina telerite ja arvutite ekraanides"]
+  },
+  {
+    "word": "düsproosium",
+    "definitions": ["Keemiline element, mille sümbol on Dy", "Metall, mis suudab kergesti püüda neutroneid ja mida kasutatakse tuumareaktorite juhtvarrastes"]
+  },
+  {
+    "word": "holmium",
+    "definitions": ["Keemiline element, mille sümbol on Ho", "Erakordsete magnetiliste omadustega metall, mida kasutatakse võimsate meditsiiniliste laserite tootmises"]
+  },
+  {
+    "word": "erbium",
+    "definitions": ["Keemiline element, mille sümbol on Er", "Hõbedane metall, mille roosasid ühendeid kasutatakse klaasi värvimiseks ja fiiberoptilistes kaablites"]
+  },
+  {
+    "word": "tuulium",
+    "definitions": ["Keemiline element, mille sümbol on Tm", "Üks kõige haruldasemaid ja kallimaid stabiilseid metalle, mida kasutatakse kaasaskantavates röntgeniaparaatides"]
+  },
+  {
+    "word": "itterbium",
+    "definitions": ["Keemiline element, mille sümbol on Yb", "Pehme ja plastne metall, mida kasutatakse roostevaba terase omaduste parandamiseks ja kaasaskantavates röntgeniseadmetes"]
+  },
+  {
+    "word": "luteetsium",
+    "definitions": ["Keemiline element, mille sümbol on Lu", "Viimane ja kõige kõvem lantanoidide rühma element, mida kasutatakse naftatööstuses katalüsaatorina"]
+  },
+  {
+    "word": "haafnium",
+    "definitions": ["Keemiline element, mille sümbol on Hf", "Läikiv terashall metall, mida kasutatakse mikroprotsessorite tootmisel ja tuumareaktorites"]
+  },
+  {
+    "word": "tantaal",
+    "definitions": ["Keemiline element, mille sümbol on Ta", "Väga korrosioonikindel kõva metall, millest valmistatakse elektroonikakomponente nagu kondensaatorid"]
+  },
+  {
+    "word": "volfram",
+    "definitions": ["Keemiline element, mille sümbol on W", "Kõige kõrgema sulamistemperatuuriga metall, millest tehti vanasti hõõglampide niite"]
+  },
+  {
+    "word": "reenium",
+    "definitions": ["Keemiline element, mille sümbol on Re", "Üks maailma haruldasemaid metalle, mida lisatakse niklisulamitele reaktiivmootorite turbiinide tugevdamiseks"]
+  },
+  {
+    "word": "osmium",
+    "definitions": ["Keemiline element, mille sümbol on Os", "Maailma kõige suurema tihedusega ja kõige raskem looduslik element"]
+  },
+  {
+    "word": "iriidium",
+    "definitions": ["Keemiline element, mille sümbol on Ir", "Väga kõva ja korrosioonikindel kollaka läikega metall, mille kõrge sisaldus maapõues viitab meteoriidi kokkupõrkele"]
+  },
+  {
+    "word": "plaatina",
+    "definitions": ["Keemiline element, mille sümbol on Pt", "Kallis väärismetall, mida kasutatakse autode katalüsaatorites, laborisisseseades ja eksklusiivsetes ehetes"]
+  },
+  {
+    "word": "kuld",
+    "definitions": ["Keemiline element, mille sümbol on Au", "Kollase läikega pehme väärismetall, mis on läbi ajaloo olnud rikkuse ja raha sümboliks"]
+  },
+  {
+    "word": "elavhõbe",
+    "definitions": ["Keemiline element, mille sümbol on Hg", "Ainus metall perioodilisustabelis, mis on toatemperatuuril vedelas olekus"]
+  },
+  {
+    "word": "tallium",
+    "definitions": ["Keemiline element, mille sümbol on Tl", "Väga mürgine pehme metall, mille ühendeid kasutati vanasti kurikuulsa rotimürgina"]
+  },
+  {
+    "word": "plii",
+    "definitions": ["Keemiline element, mille sümbol on Pb", "Raske, pehme ja mürgine metall, mida kasutatakse autoakudes ja radiatsioonikaitsekilpides"]
+  },
+  {
+    "word": "bismut",
+    "definitions": ["Keemiline element, mille sümbol on Bi", "Roosaka läikega metall, mille ühendeid kasutatakse kosmeetikas ja kõhurohtudes"]
+  },
+  {
+    "word": "poloonium",
+    "definitions": ["Keemiline element, mille sümbol on Po", "Tugevalt radioaktiivne haruldane element, mille avastas Marie Curie ja nimetas oma kodumaa Poola järgi"]
+  },
+  {
+    "word": "astaat",
+    "definitions": ["Keemiline element, mille sümbol on At", "Maakera koores kõige haruldasem looduslik element, mida leidub korraga kogu maailmas vaid paarkümmend grammi"]
+  },
+  {
+    "word": "radoon",
+    "definitions": ["Keemiline element, mille sümbol on Rn", "Lõhnavaba ja värvitu radioaktiivne gaas, mis võib valguda maapõuest hoonetesse ja on tervisele ohtlik"]
+  },
+  {
+    "word": "frantsium",
+    "definitions": ["Keemiline element, mille sümbol on Fr", "Äärmiselt radioaktiivne ja ebastabiilne leelismetall, mis laguneb vaid minutite jooksul"]
+  },
+  {
+    "word": "raadium",
+    "definitions": ["Keemiline element, mille sümbol on Ra", "Läikiv valge radioaktiivne metall, mida kasutati vanasti kellaseierite pimedas helendama panemiseks"]
+  },
+  {
+    "word": "aktiinium",
+    "definitions": ["Keemiline element, mille sümbol on Ac", "Hõbevalge tugevalt radioaktiivne metall, mis helendab pimedas salapärase sinise valgusega"]
+  },
+  {
+    "word": "toorium",
+    "definitions": ["Keemiline element, mille sümbol on Th", "Nõrgalt radioaktiivne metall, mida uuritakse kui tulevikutehnoloogia ohutumat kütust tuumareaktorites"]
+  },
+  {
+    "word": "protaktiinium",
+    "definitions": ["Keemiline element, mille sümbol on Pa", "Väga haruldane, tihe ja radioaktiivne metall, mis on uraani lagunemissaadus"]
+  },
+  {
+    "word": "uraan",
+    "definitions": ["Keemiline element, mille sümbol on U", "Väga raske radioaktiivne element, mida kasutatakse peamise kütusena tuumaelektrijaamades"]
+  },
+  {
+    "word": "neptuunium",
+    "definitions": ["Keemiline element, mille sümbol on Np", "Esimene tehislik transuraanilaadne element, mis sai nime planeet Neptuuni järgi"]
+  },
+  {
+    "word": "plutoonium",
+    "definitions": ["Keemiline element, mille sümbol on Pu", "Kurikuulus radioaktiivne element, mida kasutatakse tuumarelvades ja kosmosesondide patareides"]
+  },
+  {
+    "word": "ameriitsium",
+    "definitions": ["Keemiline element, mille sümbol on Am", "Tehislik radioaktiivne metall, mida leidub tavalistes kodustes suitsuandurites"]
+  },
+  {
+    "word": "kuurium",
+    "definitions": ["Keemiline element, mille sümbol on Cm", "Tehislik element, mis nimetati kuulsate teadlaste Marie ja Pierre Curie auks"]
+  },
+  {
+    "word": "berklium",
+    "definitions": ["Keemiline element, mille sümbol on Bk", "Radioaktiivne metall, mis loodi ja sai nime Berkeley linna järgi Californias"]
+  },
+  {
+    "word": "kalifornium",
+    "definitions": ["Keemiline element, mille sümbol on Cf", "Väga tugev neutronite allikas, mida kasutatakse metallide otsimiseks ja vähi ravimisel"]
+  },
+  {
+    "word": "einsteinium",
+    "definitions": ["Keemiline element, mille sümbol on Es", "Element, mis avastati esmakordselt esimese vesinikupommi plahvatuse jäänustest ja nimetati Albert Einsteini järgi"]
+  },
+  {
+    "word": "fermium",
+    "definitions": ["Keemiline element, mille sümbol on Fm", "Raske tehislik element, mis sai nime füüsik Enrico Fermi järgi"]
+  },
+  {
+    "word": "mendeleevium",
+    "definitions": ["Keemiline element, mille sümbol on Md", "Element, mis sai nime perioodilisustabeli looja Dmitri Mendelejevi järgi"]
+  },
+  {
+    "word": "nobeelium",
+    "definitions": ["Keemiline element, mille sümbol on No", "Radioaktiivne element, mis nimetati dünamiidi leiutaja Alfred Nobeli järgi"]
+  },
+  {
+    "word": "laurentsium",
+    "definitions": ["Keemiline element, mille sümbol on Lr", "Aktinoidide rea viimane element, mis on nime saanud tsüklotroni leiutaja Ernest Lawrence'i järgi"]
+  },
+  {
+    "word": "rutherfordium",
+    "definitions": ["Keemiline element, mille sümbol on Rf", "Esimene transaktinoidne element, mis nimetati tuumafüüsika isa Ernest Rutherfordi järgi"]
+  },
+  {
+    "word": "dubnium",
+    "definitions": ["Keemiline element, mille sümbol on Db", "Tehislik element, mis on saanud nime Venemaal asuva Dubna uurimiskeskuse järgi"]
+  },
+  {
+    "word": "seaborgium",
+    "definitions": ["Keemiline element, mille sümbol on Sg", "Element, mis sai nime keemik Glenn Seaborgi järgi, kui ta veel ise elus oli"]
+  },
+  {
+    "word": "bohrium",
+    "definitions": ["Keemiline element, mille sümbol on Bh", "Üliraske tehislik element, mis sai nime taani füüsiku Niels Bohri järgi"]
+  },
+  {
+    "word": "hassium",
+    "definitions": ["Keemiline element, mille sümbol on Hs", "Saksamaal avastatud element, mille nimi tuleneb Hesseni liidumaa ladinakeelsest nimest"]
+  },
+  {
+    "word": "meitneerium",
+    "definitions": ["Keemiline element, mille sümbol on Mt", "Element, mis sai nime tuumalõhustumise avastaja Lise Meitneri järgi"]
+  },
+  {
+    "word": "darmstadtium",
+    "definitions": ["Keemiline element, mille sümbol on Ds", "Üliraske metall, mis sai nime Saksamaa linna Darmstadti järgi, kus see esmakordselt sünteesiti"]
+  },
+  {
+    "word": "röntgenium",
+    "definitions": ["Keemiline element, mille sümbol on Rg", "Element, mis nimetati röntgenkiirte avastaja Wilhelm Röntgeni auks"]
+  },
+  {
+    "word": "koperniikium",
+    "definitions": ["Keemiline element, mille sümbol on Cn", "Üliraske tehislik element, mis sai nime kuulsa astronoomi Mikołaj Koperniku järgi"]
+  },
+  {
+    "word": "nihoonium",
+    "definitions": ["Keemiline element, mille sümbol on Nh", "Jaapanis avastatud element, mille nimi tähendab jaapani keeles 'tõusva päikese maa'"]
+  },
+  {
+    "word": "flerovium",
+    "definitions": ["Keemiline element, mille sümbol on Fl", "Üliraske tehislik element, mis sai nime Flerovi tuumareaktsioonide laboratooriumi järgi"]
+  },
+  {
+    "word": "moskoovium",
+    "definitions": ["Keemiline element, mille sümbol on Mc", "Tehislik element, mis on nime saanud Moskva oblasti järgi"]
+  },
+  {
+    "word": "livermoorium",
+    "definitions": ["Keemiline element, mille sümbol on Lv", "Tehislikult loodud element, mis sai nime USA-s asuva Lawrence Livermore'i riikliku laboratooriumi järgi"]
+  },
+  {
+    "word": "tennessiin",
+    "definitions": ["Keemiline element, mille sümbol on Ts", "Perioodilisustabeli eelviimane element, mis sai nime USA Tennessee osariigi järgi"]
+  },
+  {
+    "word": "oganesoon",
+    "definitions": ["Keemiline element, mille sümbol on Og", "Perioodilisustabeli kõige viimane, 118. element, mis on nimetatud tuumafüüsik Juri Oganesjani järgi"]
+  }
+]
