@@ -27,6 +27,7 @@ import com.aleksander.wordgames.word.dto.model.WordDto;
 import com.aleksander.wordgames.word.dto.request.WordFilterRequest;
 import com.aleksander.wordgames.word.dto.request.WordRandomListRequest;
 import com.aleksander.wordgames.word.dto.request.WordSortRequest;
+import com.aleksander.wordgames.word.engine.meta.WordMetaBuilder;
 import com.aleksander.wordgames.word.enums.SortOrder;
 import com.aleksander.wordgames.word.enums.SortType;
 import com.aleksander.wordgames.word.service.WordService;
@@ -39,6 +40,8 @@ public class FindWordService implements GameGenerator<FindWordRequest, FindWordR
 
     private final WordService wordService;
     private final Random random = new Random();
+
+    private final WordMetaBuilder wordMetaBuilder;
 
     @Override
     public FindWordResponse generate(FindWordRequest request) {
@@ -140,7 +143,7 @@ public class FindWordService implements GameGenerator<FindWordRequest, FindWordR
 
                 List<FindWordPlacementDto> enrichedClues = enrichDefinitions(clues);
 
-                FilterMetaDto meta = wordService.buildFilterMeta(request.getFilter());
+                FilterMetaDto meta = wordMetaBuilder.buildFilterMeta(request.getFilter());
 
                 return new FindWordResponse(
                         GameType.FIND_WORD,

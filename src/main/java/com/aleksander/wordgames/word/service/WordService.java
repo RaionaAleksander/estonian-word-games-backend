@@ -8,8 +8,6 @@ import org.springframework.stereotype.Service;
 import com.aleksander.wordgames.config.loader.WordImportService;
 import com.aleksander.wordgames.model.entity.Word;
 import com.aleksander.wordgames.model.entity.WordDefinition;
-import com.aleksander.wordgames.word.dto.meta.FilterMetaDto;
-import com.aleksander.wordgames.word.dto.meta.SortMetaDto;
 import com.aleksander.wordgames.word.dto.meta.WordRequestMetaDto;
 import com.aleksander.wordgames.word.dto.model.WordDto;
 import com.aleksander.wordgames.word.dto.request.WordFilterRequest;
@@ -22,6 +20,7 @@ import com.aleksander.wordgames.word.dto.response.WordExistsResponse;
 import com.aleksander.wordgames.word.dto.response.WordPageResponse;
 import com.aleksander.wordgames.word.dto.response.WordPatternResponse;
 import com.aleksander.wordgames.word.dto.response.WordResponse;
+import com.aleksander.wordgames.word.engine.meta.WordMetaBuilder;
 import com.aleksander.wordgames.word.enums.SortOrder;
 import com.aleksander.wordgames.word.exception.WordNotFoundException;
 import com.aleksander.wordgames.word.repository.WordDefinitionRepository;
@@ -46,12 +45,13 @@ public class WordService {
     private final WordRepository wordRepository;
     private final WordDefinitionRepository wordDefinitionRepository;
     private final WordImportService wordImportService;
+    private final WordMetaBuilder wordMetaBuilder;
 
     public WordResponse getRandomWordsResponse(WordRandomListRequest request) {
 
         List<WordDto> result = findRandomWords(request);
 
-        WordRequestMetaDto meta = buildWordRequestMeta(
+        WordRequestMetaDto meta = wordMetaBuilder.buildWordRequestMeta(
                 request.getFilter(),
                 request.getSort());
 
@@ -73,7 +73,7 @@ public class WordService {
 
         int totalPages = (int) Math.ceil((double) totalElements / size);
 
-        WordRequestMetaDto meta = buildWordRequestMeta(
+        WordRequestMetaDto meta = wordMetaBuilder.buildWordRequestMeta(
                 request.getFilter(),
                 request.getSort());
 
@@ -400,52 +400,5 @@ public class WordService {
         return (size != null && size > 0)
                 ? size
                 : 20;
-    }
-
-    /* Meta */
-
-    public FilterMetaDto buildFilterMeta(WordFilterRequest request) {
-
-        if (request == null) {
-            return null;
-        }
-
-        return new FilterMetaDto(
-                request.getMinLength(),
-                request.getMaxLength(),
-                request.getStartsWith(),
-                request.getEndsWith(),
-                request.getContains(),
-                request.getNotContains(),
-                request.getIncludeCategories(),
-                request.getExcludeCategories(),
-                request.getPattern(),
-                request.getExcludedWords());
-    }
-
-    public SortMetaDto buildSortMeta(WordSortRequest request) {
-
-        if (request == null || request.getSort() == null) {
-            return new SortMetaDto(null, null);
-        }
-
-        SortOrder order = request.getOrder();
-
-        if (order == null) {
-            order = SortOrder.ASC;
-        }
-
-        return new SortMetaDto(
-                request.getSort(),
-                order);
-    }
-
-    public WordRequestMetaDto buildWordRequestMeta(
-            WordFilterRequest filter,
-            WordSortRequest sort) {
-
-        return new WordRequestMetaDto(
-                buildFilterMeta(filter),
-                buildSortMeta(sort));
     }
 }

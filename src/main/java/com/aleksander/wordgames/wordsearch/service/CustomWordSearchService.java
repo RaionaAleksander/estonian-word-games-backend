@@ -11,9 +11,9 @@ import com.aleksander.wordgames.generator.GameGenerator;
 import com.aleksander.wordgames.word.dto.meta.SortMetaDto;
 import com.aleksander.wordgames.word.dto.meta.WordRequestMetaDto;
 import com.aleksander.wordgames.word.dto.request.WordSortRequest;
+import com.aleksander.wordgames.word.engine.meta.WordMetaBuilder;
 import com.aleksander.wordgames.word.enums.SortOrder;
 import com.aleksander.wordgames.word.enums.SortType;
-import com.aleksander.wordgames.word.service.WordService;
 import com.aleksander.wordgames.wordsearch.dto.PlacementDto;
 import com.aleksander.wordgames.wordsearch.dto.WordSearchResponse;
 import com.aleksander.wordgames.wordsearch.dto.request.CustomWordSearchRequest;
@@ -31,10 +31,10 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class CustomWordSearchService implements GameGenerator<CustomWordSearchRequest, WordSearchResponse> {
 
-    private final WordService wordService;
     private final GridPostProcessor gridPostProcessor;
     private final PlacementUtils placementUtils;
     private final WordGridPlacer wordGridPlacer;
+    private final WordMetaBuilder wordMetaBuilder;
 
     public WordSearchResponse generate(CustomWordSearchRequest request) {
         List<String> words = normalizeWords(request.getWords());
@@ -104,7 +104,7 @@ public class CustomWordSearchService implements GameGenerator<CustomWordSearchRe
 
                 List<WordSearchDirection> usedDirections = placementUtils.extractDirections(placements);
 
-                SortMetaDto sortMetaDto = wordService.buildSortMeta(userSort);
+                SortMetaDto sortMetaDto = wordMetaBuilder.buildSortMeta(userSort);
 
                 WordRequestMetaDto requestMeta = new WordRequestMetaDto(
                         null,
