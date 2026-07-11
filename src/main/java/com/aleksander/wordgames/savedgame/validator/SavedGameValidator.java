@@ -34,7 +34,7 @@ public class SavedGameValidator {
     public static void validateByType(JsonNode payload, GameType type) {
         switch (type) {
             case FIND_WORD -> validateFindWord(payload);
-            case WORD_SEARCH -> validateWordSearch(payload);
+            case WORD_SEARCH, CUSTOM_WORD_SEARCH -> validateWordSearch(payload);
             default -> throw new IllegalStateException("Unsupported GameType (possible enum mismatch): " + type);
         }
     }
@@ -57,7 +57,7 @@ public class SavedGameValidator {
         require(payload, "meta");
 
         JsonNode meta = payload.get("meta");
-        require(meta, "filters");
+        requirePresent(meta, "filters");
         require(meta, "sort");
     }
 
@@ -72,6 +72,12 @@ public class SavedGameValidator {
 
     private static void require(JsonNode payload, String field) {
         if (!payload.hasNonNull(field)) {
+            throw new SavedGameValidationException("Missing field: " + field);
+        }
+    }
+
+    private static void requirePresent(JsonNode payload, String field) {
+        if (!payload.has(field)) {
             throw new SavedGameValidationException("Missing field: " + field);
         }
     }
