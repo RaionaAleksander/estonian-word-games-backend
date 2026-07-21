@@ -71,7 +71,21 @@ word-loader:
       category: TOIT
     - file: ametid.json
       category: AMETID
-    - file: kodu.json
-      category: KODU
     - file: riigid.json
       category: RIIGID
+    - file: keemilised_elemendid.json
+      category: KEEMILISED_ELEMENDID
+    - file: kuud.json
+      category: KUUD
+    - file: kirjatarbed.json
+      category: KIRJATARBED
+    - file: moobel.json
+      category: MOOBEL
+    - file: riided.json
+      category: RIIDED
+    - file: koogiriistad.json
+      category: KOOGIRIISTAD
+    - file: korteriosad.json
+      category: KORTERIOSAD
+    - file: kodumasinad.json
+      category: KODUMASINAD
