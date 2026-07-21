@@ -143,6 +143,11 @@ public class WordController {
 		return wordService.getPatternResponse(word, visibleLetters);
 	}
 
+	@GetMapping("/categories")
+	public List<String> getCategories() {
+		return wordService.getCategories();
+	}
+
 	@DeleteMapping
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void deleteAll() {

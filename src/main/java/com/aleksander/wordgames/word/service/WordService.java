@@ -201,6 +201,10 @@ public class WordService {
                 now);
     }
 
+    public List<String> getCategories() {
+        return wordRepository.findAllCategories();
+    }
+
     @Transactional
     public void deleteAll() {
         wordRepository.truncate();

@@ -9,6 +9,7 @@ import com.aleksander.wordgames.model.entity.Word;
 
 import jakarta.transaction.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface WordRepository extends JpaRepository<Word, Long>, JpaSpecificationExecutor<Word> {
@@ -20,4 +21,11 @@ public interface WordRepository extends JpaRepository<Word, Long>, JpaSpecificat
     @Transactional
     @Query(value = "TRUNCATE TABLE words RESTART IDENTITY CASCADE", nativeQuery = true)
     void truncate();
+
+    @Query("""
+                select distinct w.category
+                from Word w
+                order by w.category
+            """)
+    List<String> findAllCategories();
 }
