@@ -23,6 +23,7 @@ import com.aleksander.wordgames.wordsearch.engine.placer.WordGridPlacer;
 import com.aleksander.wordgames.wordsearch.engine.placer.WordPlacementOptions;
 import com.aleksander.wordgames.wordsearch.engine.postprocess.GridPostProcessor;
 import com.aleksander.wordgames.wordsearch.engine.utils.PlacementUtils;
+import com.aleksander.wordgames.wordsearch.enums.FillAlphabet;
 import com.aleksander.wordgames.wordsearch.enums.WordSearchDirection;
 import com.aleksander.wordgames.wordsearch.exception.NoWordsFoundException;
 import com.aleksander.wordgames.wordsearch.exception.WordSearchGenerationException;
@@ -113,7 +114,7 @@ public class WordSearchService implements GameGenerator<WordSearchRequest, WordS
 
             if (success) {
 
-                gridPostProcessor.fillRandom(grid);
+                gridPostProcessor.fillRandom(grid, FillAlphabet.ESTONIAN);
 
                 gridPostProcessor.applyLetterCase(grid, request.getLetterCase());
 

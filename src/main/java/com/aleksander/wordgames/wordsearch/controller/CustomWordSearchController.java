@@ -14,6 +14,7 @@ import com.aleksander.wordgames.word.enums.SortType;
 import com.aleksander.wordgames.wordsearch.dto.WordSearchResponse;
 import com.aleksander.wordgames.wordsearch.dto.request.CustomWordSearchRequest;
 import com.aleksander.wordgames.wordsearch.engine.placer.WordPlacementOptions;
+import com.aleksander.wordgames.wordsearch.enums.FillAlphabet;
 import com.aleksander.wordgames.wordsearch.enums.WordSearchDirection;
 import com.aleksander.wordgames.wordsearch.service.CustomWordSearchService;
 
@@ -32,6 +33,7 @@ public class CustomWordSearchController {
             @RequestParam(defaultValue = "10") int cols,
             @RequestParam List<String> words,
             @RequestParam(defaultValue = "LOWER") LetterCase letterCase,
+            @RequestParam(defaultValue = "ESTONIAN") FillAlphabet alphabet,
             @RequestParam(defaultValue = "true") Boolean allowIntersections,
             @RequestParam(required = false) List<WordSearchDirection> directions,
 
@@ -51,6 +53,7 @@ public class CustomWordSearchController {
                 cols,
                 words,
                 letterCase,
+                alphabet,
                 sortRequest,
                 placementOptions);
 

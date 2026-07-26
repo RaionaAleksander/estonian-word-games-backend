@@ -81,7 +81,7 @@ public class CustomWordSearchService implements GameGenerator<CustomWordSearchRe
 
             if (success) {
 
-                gridPostProcessor.fillRandom(grid);
+                gridPostProcessor.fillRandom(grid, request.getAlphabet());
 
                 gridPostProcessor.applyLetterCase(
                         grid,
