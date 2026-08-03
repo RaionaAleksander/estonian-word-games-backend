@@ -23,6 +23,7 @@ import com.aleksander.wordgames.wordsearch.engine.postprocess.GridPostProcessor;
 import com.aleksander.wordgames.wordsearch.engine.utils.PlacementUtils;
 import com.aleksander.wordgames.wordsearch.enums.WordSearchDirection;
 import com.aleksander.wordgames.wordsearch.exception.WordSearchGenerationException;
+import com.aleksander.wordgames.wordsearch.utils.WordSortUtils;
 import com.aleksander.wordgames.wordsearch.validation.CustomWordSearchValidator;
 
 import lombok.RequiredArgsConstructor;
@@ -35,6 +36,7 @@ public class CustomWordSearchService implements GameGenerator<CustomWordSearchRe
     private final PlacementUtils placementUtils;
     private final WordGridPlacer wordGridPlacer;
     private final WordMetaBuilder wordMetaBuilder;
+    private final WordSortUtils wordSortUtils;
 
     public WordSearchResponse generate(CustomWordSearchRequest request) {
         List<String> words = normalizeWords(request.getWords());
@@ -93,7 +95,7 @@ public class CustomWordSearchService implements GameGenerator<CustomWordSearchRe
                     userSort = generationSort;
                 }
 
-                if (!isGenerationSort(userSort)) {
+                if (!wordSortUtils.isGenerationSort(userSort)) {
                     placements = placementUtils.sortPlacements(
                             placements,
                             userSort);
@@ -130,11 +132,6 @@ public class CustomWordSearchService implements GameGenerator<CustomWordSearchRe
     }
 
     // ---------------- helpers ----------------
-
-    private boolean isGenerationSort(WordSortRequest request) {
-        return request.getSort() == SortType.LENGTH
-                && request.getOrder() == SortOrder.DESC;
-    }
 
     private List<String> normalizeWords(List<String> words) {
         if (words == null) {
