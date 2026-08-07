@@ -1,0 +1,32 @@
+package com.aleksander.wordgames.wordsearch.dto.request;
+
+import java.util.List;
+
+import com.aleksander.wordgames.common.enums.LetterCase;
+import com.aleksander.wordgames.word.dto.request.WordSortRequest;
+import com.aleksander.wordgames.wordsearch.dto.CellCoordinate;
+import com.aleksander.wordgames.wordsearch.engine.placer.WordPlacementOptions;
+import com.aleksander.wordgames.wordsearch.enums.FillAlphabet;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+
+@Data
+@AllArgsConstructor
+public class CustomShapedWordSearchRequest {
+
+    private int rows;
+    private int cols;
+
+    private List<CellCoordinate> blockedCells;
+
+    private List<String> words;
+
+    private LetterCase letterCase;
+
+    private FillAlphabet alphabet;
+
+    private WordSortRequest sort;
+
+    private WordPlacementOptions placement;
+}
