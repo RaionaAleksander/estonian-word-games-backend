@@ -3,21 +3,16 @@ package com.aleksander.wordgames.wordsearch.validation;
 import java.util.HashSet;
 import java.util.List;
 
-import com.aleksander.wordgames.wordsearch.dto.request.CustomWordSearchRequest;
 import com.aleksander.wordgames.wordsearch.exception.WordSearchValidationException;
 
 public class CustomWordSearchValidator {
 
-    public static void validate(CustomWordSearchRequest request) {
+    public static void validate(
+            int rows,
+            int cols,
+            List<String> words) {
 
-        int rows = request.getRows();
-        int cols = request.getCols();
-
-        if (rows <= 0 || cols <= 0) {
-            throw new WordSearchValidationException("Grid size must be positive");
-        }
-
-        List<String> words = request.getWords();
+        GridValidator.validateSize(rows, cols);
 
         if (words == null || words.isEmpty()) {
             throw new WordSearchValidationException("Words list must not be empty");

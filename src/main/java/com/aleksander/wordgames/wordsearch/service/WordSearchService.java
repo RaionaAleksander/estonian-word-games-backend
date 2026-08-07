@@ -46,8 +46,11 @@ public class WordSearchService implements GameGenerator<WordSearchRequest, WordS
     private final WordSortUtils wordSortUtils;
 
     public WordSearchResponse generate(WordSearchRequest request) {
-
-        WordSearchValidator.validate(request);
+        WordSearchValidator.validate(
+                request.getRows(),
+                request.getCols(),
+                request.getWordsCount(),
+                request.getFilter());
 
         int rows = request.getRows();
         int cols = request.getCols();

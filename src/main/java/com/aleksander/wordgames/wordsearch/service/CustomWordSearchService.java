@@ -43,7 +43,10 @@ public class CustomWordSearchService implements GameGenerator<CustomWordSearchRe
 
         request.setWords(words);
 
-        CustomWordSearchValidator.validate(request);
+        CustomWordSearchValidator.validate(
+                request.getRows(),
+                request.getCols(),
+                request.getWords());
 
         int rows = request.getRows();
         int cols = request.getCols();
