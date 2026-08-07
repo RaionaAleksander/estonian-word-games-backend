@@ -23,6 +23,7 @@ import com.aleksander.wordgames.wordsearch.engine.postprocess.GridPostProcessor;
 import com.aleksander.wordgames.wordsearch.engine.utils.PlacementUtils;
 import com.aleksander.wordgames.wordsearch.enums.WordSearchDirection;
 import com.aleksander.wordgames.wordsearch.exception.WordSearchGenerationException;
+import com.aleksander.wordgames.wordsearch.utils.WordNormalizer;
 import com.aleksander.wordgames.wordsearch.utils.WordSortUtils;
 import com.aleksander.wordgames.wordsearch.validation.CustomWordSearchValidator;
 
@@ -37,9 +38,10 @@ public class CustomWordSearchService implements GameGenerator<CustomWordSearchRe
     private final WordGridPlacer wordGridPlacer;
     private final WordMetaBuilder wordMetaBuilder;
     private final WordSortUtils wordSortUtils;
+    private final WordNormalizer wordNormalizer;
 
     public WordSearchResponse generate(CustomWordSearchRequest request) {
-        List<String> words = normalizeWords(request.getWords());
+        List<String> words = wordNormalizer.normalize(request.getWords());
 
         request.setWords(words);
 
@@ -132,18 +134,5 @@ public class CustomWordSearchService implements GameGenerator<CustomWordSearchRe
         }
 
         throw new WordSearchGenerationException("Failed to generate custom word search");
-    }
-
-    // ---------------- helpers ----------------
-
-    private List<String> normalizeWords(List<String> words) {
-        if (words == null) {
-            return null;
-        }
-
-        return words.stream()
-                .map(String::trim)
-                .map(String::toLowerCase)
-                .toList();
     }
 }
