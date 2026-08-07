@@ -34,7 +34,8 @@ public class SavedGameValidator {
     public static void validateByType(JsonNode payload, GameType type) {
         switch (type) {
             case FIND_WORD -> validateFindWord(payload);
-            case WORD_SEARCH, CUSTOM_WORD_SEARCH -> validateWordSearch(payload);
+            case WORD_SEARCH, CUSTOM_WORD_SEARCH, SHAPED_WORD_SEARCH, CUSTOM_SHAPED_WORD_SEARCH ->
+                validateWordSearch(payload);
             default -> throw new IllegalStateException("Unsupported GameType (possible enum mismatch): " + type);
         }
     }

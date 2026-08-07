@@ -1,0 +1,195 @@
+package com.aleksander.wordgames.wordsearch.service;
+
+import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+import com.aleksander.wordgames.common.enums.GameType;
+import com.aleksander.wordgames.generator.GameGenerator;
+import com.aleksander.wordgames.word.dto.meta.FilterMetaDto;
+import com.aleksander.wordgames.word.dto.meta.SortMetaDto;
+import com.aleksander.wordgames.word.dto.meta.WordRequestMetaDto;
+import com.aleksander.wordgames.word.dto.model.WordDto;
+import com.aleksander.wordgames.word.dto.request.WordFilterRequest;
+import com.aleksander.wordgames.word.dto.request.WordRandomListRequest;
+import com.aleksander.wordgames.word.dto.request.WordSortRequest;
+import com.aleksander.wordgames.word.engine.meta.WordMetaBuilder;
+import com.aleksander.wordgames.word.enums.SortOrder;
+import com.aleksander.wordgames.word.enums.SortType;
+import com.aleksander.wordgames.word.service.WordService;
+import com.aleksander.wordgames.wordsearch.dto.PlacementDto;
+import com.aleksander.wordgames.wordsearch.dto.WordSearchResponse;
+import com.aleksander.wordgames.wordsearch.dto.request.ShapedWordSearchRequest;
+import com.aleksander.wordgames.wordsearch.engine.placer.WordGridPlacer;
+import com.aleksander.wordgames.wordsearch.engine.placer.WordPlacementOptions;
+import com.aleksander.wordgames.wordsearch.engine.postprocess.GridPostProcessor;
+import com.aleksander.wordgames.wordsearch.engine.utils.PlacementUtils;
+import com.aleksander.wordgames.wordsearch.enums.FillAlphabet;
+import com.aleksander.wordgames.wordsearch.enums.WordSearchDirection;
+import com.aleksander.wordgames.wordsearch.exception.NoWordsFoundException;
+import com.aleksander.wordgames.wordsearch.exception.WordSearchGenerationException;
+import com.aleksander.wordgames.wordsearch.utils.WordSortUtils;
+import com.aleksander.wordgames.wordsearch.validation.ShapeValidator;
+import com.aleksander.wordgames.wordsearch.validation.WordSearchValidator;
+
+import lombok.RequiredArgsConstructor;
+
+@Service
+@RequiredArgsConstructor
+public class ShapedWordSearchService implements GameGenerator<ShapedWordSearchRequest, WordSearchResponse> {
+
+    private final WordService wordService;
+    private final GridPostProcessor gridPostProcessor;
+    private final PlacementUtils placementUtils;
+    private final WordGridPlacer wordGridPlacer;
+    private final WordMetaBuilder wordMetaBuilder;
+    private final WordSortUtils wordSortUtils;
+
+    public WordSearchResponse generate(ShapedWordSearchRequest request) {
+
+        WordSearchValidator.validate(
+                request.getRows(),
+                request.getCols(),
+                request.getWordsCount(),
+                request.getFilter());
+
+        ShapeValidator.validate(
+                request.getRows(),
+                request.getCols(),
+                request.getBlockedCells());
+
+        int rows = request.getRows();
+        int cols = request.getCols();
+
+        WordPlacementOptions placementOptions = request.getPlacement();
+
+        WordFilterRequest filter = request.getFilter();
+
+        if (filter.getMaxLength() == null) {
+            filter.setMaxLength(Math.max(rows, cols));
+        }
+
+        WordSortRequest generationSort = new WordSortRequest(
+                SortType.LENGTH,
+                SortOrder.DESC);
+
+        WordRandomListRequest listRequest = new WordRandomListRequest(
+                filter,
+                generationSort,
+                request.getWordsCount());
+
+        List<String> words = wordService.findRandomWords(listRequest)
+                .stream()
+                .map(WordDto::getLemma)
+                .toList();
+
+        if (words.isEmpty()) {
+            throw new NoWordsFoundException();
+        }
+
+        int requested = request.getWordsCount();
+        int actual = words.size();
+
+        String warning = null;
+
+        if (actual < requested) {
+
+            if (Boolean.TRUE.equals(request.getAllowIncomplete())) {
+
+                warning = "Requested " + requested
+                        + ", but only " + actual + " words available";
+
+            } else {
+                throw new WordSearchGenerationException(
+                        "Not enough words found: " + actual + "/" + requested);
+            }
+        }
+
+        for (int attempt = 0; attempt < placementOptions.maxAttempts(); attempt++) {
+
+            char[][] grid = new char[rows][cols];
+
+            gridPostProcessor.applyBlockedCells(
+                    grid,
+                    request.getBlockedCells());
+
+            List<PlacementDto> placements = new ArrayList<>();
+
+            boolean success = true;
+
+            for (String word : words) {
+
+                PlacementDto placement = wordGridPlacer.tryPlaceWord(
+                        grid,
+                        word,
+                        placementOptions);
+
+                if (placement == null) {
+                    success = false;
+                    break;
+                }
+
+                placements.add(placement);
+            }
+
+            if (success) {
+
+                gridPostProcessor.fillRandom(
+                        grid,
+                        FillAlphabet.ESTONIAN);
+
+                gridPostProcessor.applyLetterCase(
+                        grid,
+                        request.getLetterCase());
+
+                WordSortRequest userSort = request.getSort();
+
+                if (userSort == null || userSort.getSort() == null) {
+                    userSort = generationSort;
+                }
+
+                if (!wordSortUtils.isGenerationSort(userSort)) {
+
+                    placements = placementUtils.sortPlacements(
+                            placements,
+                            userSort);
+
+                    words = placementUtils.extractWords(
+                            placements);
+                }
+
+                FilterMetaDto filterMetaDto = wordMetaBuilder.buildFilterMeta(
+                        request.getFilter());
+
+                SortMetaDto sortMetaDto = wordMetaBuilder.buildSortMeta(
+                        userSort);
+
+                WordRequestMetaDto requestMeta = new WordRequestMetaDto(
+                        filterMetaDto,
+                        sortMetaDto);
+
+                List<WordSearchDirection> usedDirections = placementUtils.extractDirections(
+                        placements);
+
+                return new WordSearchResponse(
+                        GameType.SHAPED_WORD_SEARCH,
+                        rows,
+                        cols,
+                        request.getLetterCase(),
+                        placementOptions.allowIntersections(),
+                        usedDirections,
+                        grid,
+                        words,
+                        placements,
+                        requestMeta,
+                        Instant.now(),
+                        warning);
+            }
+        }
+
+        throw new WordSearchGenerationException(
+                "Failed to generate shaped word search");
+    }
+}
