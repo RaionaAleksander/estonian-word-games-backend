@@ -18,6 +18,7 @@ import com.aleksander.wordgames.wordsearch.enums.FillAlphabet;
 import com.aleksander.wordgames.wordsearch.enums.WordSearchDirection;
 import com.aleksander.wordgames.wordsearch.service.CustomWordSearchService;
 
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -28,6 +29,7 @@ public class CustomWordSearchController {
     private final CustomWordSearchService customWordSearchService;
 
     @GetMapping("/generate")
+    @Operation(summary = "Generate a custom word search", description = "Generates a word search using words provided by the user.")
     public WordSearchResponse generate(
             @RequestParam(defaultValue = "10") int rows,
             @RequestParam(defaultValue = "10") int cols,

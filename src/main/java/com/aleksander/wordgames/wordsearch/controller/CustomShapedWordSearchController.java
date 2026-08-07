@@ -19,6 +19,7 @@ import com.aleksander.wordgames.wordsearch.enums.FillAlphabet;
 import com.aleksander.wordgames.wordsearch.enums.WordSearchDirection;
 import com.aleksander.wordgames.wordsearch.service.CustomShapedWordSearchService;
 
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -32,6 +33,8 @@ public class CustomShapedWordSearchController {
     private final CustomShapedWordSearchService customShapedWordSearchService;
 
     @GetMapping("/generate")
+    @Operation(summary = "Generate a custom shaped word search", description = "Generates a shaped word search using words provided by the user. "
+            + "Blocked cells are provided as row,col coordinates.")
     public WordSearchResponse generate(
             @RequestParam(defaultValue = "10") int rows,
             @RequestParam(defaultValue = "10") int cols,

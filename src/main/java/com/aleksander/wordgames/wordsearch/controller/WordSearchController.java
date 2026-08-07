@@ -15,6 +15,7 @@ import com.aleksander.wordgames.wordsearch.engine.placer.WordPlacementOptions;
 import com.aleksander.wordgames.wordsearch.enums.WordSearchDirection;
 import com.aleksander.wordgames.wordsearch.service.WordSearchService;
 
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -25,6 +26,7 @@ public class WordSearchController {
     private final WordSearchService wordSearchService;
 
     @GetMapping("/generate")
+    @Operation(summary = "Generate a word search", description = "Generates a word search using words selected from the database.")
     public WordSearchResponse generate(
             @RequestParam(defaultValue = "10") int rows,
             @RequestParam(defaultValue = "10") int cols,
