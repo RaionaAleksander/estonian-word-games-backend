@@ -7,6 +7,7 @@ import java.util.Random;
 import org.springframework.stereotype.Component;
 
 import com.aleksander.wordgames.wordsearch.dto.PlacementDto;
+import com.aleksander.wordgames.wordsearch.engine.GridSymbols;
 import com.aleksander.wordgames.wordsearch.enums.WordSearchDirection;
 
 @Component
@@ -150,7 +151,11 @@ public class WordGridPlacer {
 
             char existing = grid[r][c];
 
-            if (existing == '\u0000') {
+            if (existing == GridSymbols.BLOCKED) {
+                return false;
+            }
+
+            if (existing == GridSymbols.EMPTY) {
                 continue;
             }
 

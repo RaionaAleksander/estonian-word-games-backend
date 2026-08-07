@@ -1,10 +1,13 @@
 package com.aleksander.wordgames.wordsearch.engine.postprocess;
 
+import java.util.List;
 import java.util.Random;
 
 import org.springframework.stereotype.Component;
 
 import com.aleksander.wordgames.common.enums.LetterCase;
+import com.aleksander.wordgames.wordsearch.dto.CellCoordinate;
+import com.aleksander.wordgames.wordsearch.engine.GridSymbols;
 import com.aleksander.wordgames.wordsearch.enums.FillAlphabet;
 
 import lombok.RequiredArgsConstructor;
@@ -40,7 +43,7 @@ public class GridPostProcessor {
 
         for (int row = 0; row < grid.length; row++) {
             for (int col = 0; col < grid[row].length; col++) {
-                if (grid[row][col] == '\u0000') {
+                if (grid[row][col] == GridSymbols.EMPTY) {
                     grid[row][col] = letters[random.nextInt(letters.length)];
                 }
             }
@@ -56,6 +59,15 @@ public class GridPostProcessor {
             for (int col = 0; col < grid[row].length; col++) {
                 grid[row][col] = Character.toUpperCase(grid[row][col]);
             }
+        }
+    }
+
+    public void applyBlockedCells(
+            char[][] grid,
+            List<CellCoordinate> blockedCells) {
+
+        for (CellCoordinate cell : blockedCells) {
+            grid[cell.row()][cell.col()] = GridSymbols.BLOCKED;
         }
     }
 }
